@@ -1,0 +1,147 @@
+;; TASO/Tensat tiling kernel for network-flow-guided e-graph saturation.
+;;
+;; Two rule groups:
+;;   :ruleset algebraic  --  TASO/Tensat base equivalences (Image 1)
+;;   :ruleset tiling     --  T1–T7 tile-size choices (Image 2 / Table 1)
+;;
+;; Tile sizes T ∈ {32, 64, 128}; on-chip footprint per tiled op
+;;
+;;     onchip(T) = 3·T²·sz       sz = 4 (fp32),  S_max = 64*1024 = 65536
+;;
+;; The S_max constraint is *not* enforced inside egglog — see the
+;; companion host driver `experiments/flow_prune.py`, which:
+;;   1) saturates `algebraic` then runs `tiling`,
+;;   2) extracts a candidate selection (DAG) and DFS post-order schedule,
+;;   3) computes Φ(L_p) per program point,
+;;   4) for each violating program point, subsumes the offending
+;;      TiledMm/TiledConv tile-size choice, and
+;;   5) re-runs.
+
+(datatype Tensor
+  ;; leaves
+  (TParam    String)             ;; abstract input
+  (IdMat)                        ;; matmul identity I
+  (IdKernel)                     ;; conv identity I_K
+
+  ;; element-wise / data movement
+  (TAdd      Tensor Tensor)
+  (TTrans    Tensor)             ;; transpose
+  (Cat       Tensor Tensor)      ;; concat along a fixed axis
+  (Split0    Tensor)             ;; first  component of split(cat(A,B))
+  (Split1    Tensor)             ;; second component of split(cat(A,B))
+
+  ;; linear algebra (untiled)
+  (Mm        Tensor Tensor)      ;; matrix multiply
+  (Conv      Tensor Tensor)      ;; convolution
+
+  ;; tiled targets — third arg is tile size T (i64)
+  (TiledMm   Tensor Tensor i64)
+  (TiledConv Tensor Tensor i64))
+
+;; ----------------------------------------------------------------------
+;; TASO / Tensat algebraic rules (Image 1).
+;; All written one-way per the figure; e-graph keeps both sides equal,
+;; so the reverse direction is implicitly available via e-class lookup.
+;; ----------------------------------------------------------------------
+(ruleset algebraic)
+
+;; matmul assoc:        mm(mm(A,B), C)  →  mm(A, mm(B,C))
+(rewrite (Mm (Mm a b) c) (Mm a (Mm b c)) :ruleset algebraic)
+
+;; matmul linearity:    mm(A+B, C)      →  mm(A,C) + mm(B,C)
+(rewrite (Mm (TAdd a b) c) (TAdd (Mm a c) (Mm b c)) :ruleset algebraic)
+
+;; matmul transpose:    (mm(A,B))ᵀ      →  mm(Bᵀ, Aᵀ)
+(rewrite (TTrans (Mm a b)) (Mm (TTrans b) (TTrans a)) :ruleset algebraic)
+
+;; conv bilinearity:    conv(A+B, K)    →  conv(A,K) + conv(B,K)
+(rewrite (Conv (TAdd a b) k) (TAdd (Conv a k) (Conv b k)) :ruleset algebraic)
+
+;; identity matrix:     mm(A, I)        →  A
+(rewrite (Mm a (IdMat)) a :ruleset algebraic)
+
+;; identity kernel:     conv(A, I_K)    →  A
+(rewrite (Conv a (IdKernel)) a :ruleset algebraic)
+
+;; concat/split:        split(cat(A,B)) →  (A, B)
+(rewrite (Split0 (Cat a b)) a :ruleset algebraic)
+(rewrite (Split1 (Cat a b)) b :ruleset algebraic)
+
+;; concat & transpose:  (cat(A,B))ᵀ     →  cat(Aᵀ, Bᵀ)
+(rewrite (TTrans (Cat a b)) (Cat (TTrans a) (TTrans b)) :ruleset algebraic)
+
+;; concat & matmul:     mm(cat(A,B), C) →  cat(mm(A,C), mm(B,C))
+(rewrite (Mm (Cat a b) c) (Cat (Mm a c) (Mm b c)) :ruleset algebraic)
+
+;; ----------------------------------------------------------------------
+;; Tiling rules (Image 2 / Table 1).  Constraint  onchip(T) ≤ S_max  is
+;; enforced *outside* the e-graph by `flow_prune.py` via (subsume ...).
+;; ----------------------------------------------------------------------
+(ruleset tiling)
+
+;; T1–T3: single mm
+(rewrite (Mm a c) (TiledMm a c 128) :ruleset tiling)
+(rewrite (Mm a c) (TiledMm a c  64) :ruleset tiling)
+(rewrite (Mm a c) (TiledMm a c  32) :ruleset tiling)
+
+;; T4–T5: single conv
+(rewrite (Conv a k) (TiledConv a k 128) :ruleset tiling)
+(rewrite (Conv a k) (TiledConv a k  64) :ruleset tiling)
+
+;; T6: joint mm — linearity, all 9 (T1, T2) combos with T1, T2 ∈ {32, 64, 128}
+;;       mm(A,C) + mm(B,C)  →  tiled_mm(A,C,T1) + tiled_mm(B,C,T2)
+(rewrite (TAdd (Mm a c) (Mm b c)) (TAdd (TiledMm a c  32) (TiledMm b c  32)) :ruleset tiling)
+(rewrite (TAdd (Mm a c) (Mm b c)) (TAdd (TiledMm a c  32) (TiledMm b c  64)) :ruleset tiling)
+(rewrite (TAdd (Mm a c) (Mm b c)) (TAdd (TiledMm a c  32) (TiledMm b c 128)) :ruleset tiling)
+(rewrite (TAdd (Mm a c) (Mm b c)) (TAdd (TiledMm a c  64) (TiledMm b c  32)) :ruleset tiling)
+(rewrite (TAdd (Mm a c) (Mm b c)) (TAdd (TiledMm a c  64) (TiledMm b c  64)) :ruleset tiling)
+(rewrite (TAdd (Mm a c) (Mm b c)) (TAdd (TiledMm a c  64) (TiledMm b c 128)) :ruleset tiling)
+(rewrite (TAdd (Mm a c) (Mm b c)) (TAdd (TiledMm a c 128) (TiledMm b c  32)) :ruleset tiling)
+(rewrite (TAdd (Mm a c) (Mm b c)) (TAdd (TiledMm a c 128) (TiledMm b c  64)) :ruleset tiling)
+(rewrite (TAdd (Mm a c) (Mm b c)) (TAdd (TiledMm a c 128) (TiledMm b c 128)) :ruleset tiling)
+
+;; T7: joint mm — concat, all 9 (T1, T2) combos.
+;;       cat(mm(A,C), mm(B,C))  →  cat(tiled_mm(A,C,T1), tiled_mm(B,C,T2))
+(rewrite (Cat (Mm a c) (Mm b c)) (Cat (TiledMm a c  32) (TiledMm b c  32)) :ruleset tiling)
+(rewrite (Cat (Mm a c) (Mm b c)) (Cat (TiledMm a c  32) (TiledMm b c  64)) :ruleset tiling)
+(rewrite (Cat (Mm a c) (Mm b c)) (Cat (TiledMm a c  32) (TiledMm b c 128)) :ruleset tiling)
+(rewrite (Cat (Mm a c) (Mm b c)) (Cat (TiledMm a c  64) (TiledMm b c  32)) :ruleset tiling)
+(rewrite (Cat (Mm a c) (Mm b c)) (Cat (TiledMm a c  64) (TiledMm b c  64)) :ruleset tiling)
+(rewrite (Cat (Mm a c) (Mm b c)) (Cat (TiledMm a c  64) (TiledMm b c 128)) :ruleset tiling)
+(rewrite (Cat (Mm a c) (Mm b c)) (Cat (TiledMm a c 128) (TiledMm b c  32)) :ruleset tiling)
+(rewrite (Cat (Mm a c) (Mm b c)) (Cat (TiledMm a c 128) (TiledMm b c  64)) :ruleset tiling)
+(rewrite (Cat (Mm a c) (Mm b c)) (Cat (TiledMm a c 128) (TiledMm b c 128)) :ruleset tiling)
+
+;; ----------------------------------------------------------------------
+;; Sample workload — exercises every algebraic + tiling rule above so the
+;; downstream flow analysis has something to chew on.
+;; The host driver will append additional (subsume ...) lines per round.
+;; ----------------------------------------------------------------------
+(let $A (TParam "A"))
+(let $B (TParam "B"))
+(let $C (TParam "C"))
+(let $K (TParam "K"))
+
+;; T7 target: cat(mm(A,C), mm(B,C))  — primary concat-matmul site
+(let $jointmm  (Cat (Mm $A $C) (Mm $B $C)))
+
+;; T6 / linearity target: mm(A+B, C)  — fans out into mm(A,C) + mm(B,C)
+(let $linmm    (Mm (TAdd $A $B) $C))
+
+;; identity short-circuit demo: mm(A, I) → A
+(let $idmm     (Mm $A (IdMat)))
+
+;; conv bilinearity demo: conv(A+B, K) → conv(A,K) + conv(B,K)
+(let $bilconv  (Conv (TAdd $A $B) $K))
+
+;; transpose-of-matmul demo
+(let $tposemm  (TTrans (Mm $A $B)))
+
+;; split-of-cat demo
+(let $splitcat (Split0 (Cat $A $B)))
+
+;; Saturate algebraic rules first, then materialise tiling alternatives.
+;; The host driver replaces this with its own (run-schedule …) per round.
+(run-schedule
+  (saturate (run algebraic))
+  (run tiling))

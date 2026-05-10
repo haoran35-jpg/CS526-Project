@@ -1,0 +1,10 @@
+# Required for running flow_prune.py and rendering figures.
+matplotlib>=3.7
+plotly>=5.18
+
+# Optional: only needed if you want to regenerate the HLO dumps in jax_hlo/
+# from the JAX/Flax sources in experiments/jax_models.py.
+# Uncomment if you plan to re-run scale_hlo.py / jax_models.py.
+# jax>=0.4.20
+# jaxlib>=0.4.20
+# flax>=0.7

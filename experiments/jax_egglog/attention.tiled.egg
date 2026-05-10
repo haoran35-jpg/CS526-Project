@@ -1,0 +1,134 @@
+
+;; Auto-generated HLO -> egglog datatype.
+
+(datatype Hlo
+  (HParam String)
+  (HConst String)
+
+  ;; element-wise unary
+  (HNeg Hlo)
+  (HAbs Hlo)
+  (HExp Hlo)
+  (HLog Hlo)
+  (HSqrt Hlo)
+  (HRsqrt Hlo)
+  (HTanh Hlo)
+  (HSigmoid Hlo)
+  (HRelu Hlo)
+  (HCopy Hlo)
+  (HConvert Hlo String)
+
+  ;; element-wise binary
+  (HAdd Hlo Hlo)
+  (HSub Hlo Hlo)
+  (HMul Hlo Hlo)
+  (HDiv Hlo Hlo)
+  (HMax Hlo Hlo)
+  (HMin Hlo Hlo)
+  (HPow Hlo Hlo)
+  (HCompare Hlo Hlo String)
+
+  ;; ternary
+  (HSelect Hlo Hlo Hlo)
+
+  ;; data movement
+  (HTranspose Hlo String)
+  (HReshape Hlo String)
+  (HBroadcast Hlo String)
+  (HSlice Hlo String)
+  (HConcat Hlo Hlo String)
+  (HPad Hlo Hlo String)
+  (HReverse Hlo String)
+
+  ;; linear algebra
+  (HDot Hlo Hlo String)
+  (HConv Hlo Hlo String)
+
+  ;; reductions (input, init, dims-tag)
+  (HReduceSum Hlo Hlo String)
+  (HReduceMax Hlo Hlo String)
+  (HReduceMin Hlo Hlo String)
+  (HReduceProd Hlo Hlo String)
+
+  (HIota String String)
+
+  ;; generic fallback for opcodes the bridge doesn't model individually
+  (HOp1 String Hlo)
+  (HOp2 String Hlo Hlo)
+  (HOp3 String Hlo Hlo Hlo)
+  (HOp4 String Hlo Hlo Hlo Hlo)
+  (HOp5 String Hlo Hlo Hlo Hlo Hlo)
+  ;; ----- flow_prune injected tiled targets -----
+  (TiledHDot  Hlo Hlo String i64)
+  (TiledHConv Hlo Hlo String i64)
+)
+;; ----- flow_prune ruleset declarations -----
+(ruleset algebraic)
+(ruleset tiling)
+
+
+
+;; ---- structural simplifications ----------------------------------------
+(rewrite (HRelu (HRelu x)) (HRelu x) :ruleset algebraic)
+(rewrite (HCopy x) x :ruleset algebraic)
+(rewrite (HConvert (HConvert x s1) s2) (HConvert x s2) :ruleset algebraic)
+(rewrite (HReshape (HReshape x s1) s2) (HReshape x s2) :ruleset algebraic)
+(rewrite (HNeg (HNeg x)) x :ruleset algebraic)
+
+;; ---- algebraic equivalences (these grow the e-graph) -------------------
+(rewrite (HAdd a b) (HAdd b a) :ruleset algebraic)
+(rewrite (HMul a b) (HMul b a) :ruleset algebraic)
+(rewrite (HMax a b) (HMax b a) :ruleset algebraic)
+(rewrite (HMin a b) (HMin b a) :ruleset algebraic)
+
+(rewrite (HAdd (HAdd a b) c) (HAdd a (HAdd b c)) :ruleset algebraic)
+(rewrite (HAdd a (HAdd b c)) (HAdd (HAdd a b) c) :ruleset algebraic)
+(rewrite (HMul (HMul a b) c) (HMul a (HMul b c)) :ruleset algebraic)
+(rewrite (HMul a (HMul b c)) (HMul (HMul a b) c) :ruleset algebraic)
+
+(rewrite (HSub a b) (HAdd a (HNeg b)) :ruleset algebraic)
+(rewrite (HAdd a (HNeg b)) (HSub a b) :ruleset algebraic)
+
+(let $p__params____k____kernel___1 (HParam "p__params____k____kernel__.1"))
+(let $p__params____q____kernel___1 (HParam "p__params____q____kernel__.1"))
+(let $p__params____v____kernel___1 (HParam "p__params____v____kernel__.1"))
+(let $x_1 (HParam "x.1"))
+(let $inl1__lambda__3_dot_general_5 (HDot $x_1 $p__params____q____kernel___1 "lhs_contracting_dims={2};rhs_contracting_dims={0}"))
+(let $inl1__lambda__3_dot_general_6 (HDot $x_1 $p__params____k____kernel___1 "lhs_contracting_dims={2};rhs_contracting_dims={0}"))
+(let $inl1__lambda__3_dot_general_8 (HDot $inl1__lambda__3_dot_general_5 $inl1__lambda__3_dot_general_6 "lhs_contracting_dims={2};rhs_contracting_dims={2};lhs_batch_dims={0};rhs_batch_dims={0}"))
+(let $inl1__lambda__3_constant_5 (HConst "4"))
+(let $inl1__lambda__3_div_6 (HBroadcast $inl1__lambda__3_constant_5 "{}"))
+(let $inl1__lambda__3_div_7 (HDiv $inl1__lambda__3_dot_general_8 $inl1__lambda__3_div_6))
+(let $inl1__lambda__3_constant_7 (HConst "-inf"))
+(let $inl1__lambda__3_reduce_max_7 (HReduceMax $inl1__lambda__3_div_7 $inl1__lambda__3_constant_7 "{2}"))
+(let $inl1__lambda__3_constant_4 (HConst "-inf"))
+(let $inl1__lambda__3_broadcast_1 (HBroadcast $inl1__lambda__3_constant_4 "{}"))
+(let $inl1__lambda__3_max_1 (HMax $inl1__lambda__3_reduce_max_7 $inl1__lambda__3_broadcast_1))
+(let $inl1__lambda__3_broadcast_in_dim_2 (HReshape $inl1__lambda__3_max_1 "f32[1,8,1]{2,1,0}"))
+(let $inl1__lambda__3_sub_4 (HBroadcast $inl1__lambda__3_broadcast_in_dim_2 "{0,1,2}"))
+(let $inl1__lambda__3_sub_5 (HReshape $inl1__lambda__3_sub_4 "f32[1,8]{1,0}"))
+(let $inl1__lambda__3_sub_6 (HBroadcast $inl1__lambda__3_sub_5 "{0,1}"))
+(let $inl1__lambda__3_sub_7 (HSub $inl1__lambda__3_div_7 $inl1__lambda__3_sub_6))
+(let $inl1__lambda__3_exp_1 (HExp $inl1__lambda__3_sub_7))
+(let $inl1__lambda__3_constant_6 (HConst "0"))
+(let $inl1__lambda__3_reduce_sum_7 (HReduceSum $inl1__lambda__3_exp_1 $inl1__lambda__3_constant_6 "{2}"))
+(let $inl1__lambda__3_broadcast_in_dim_3 (HReshape $inl1__lambda__3_reduce_sum_7 "f32[1,8,1]{2,1,0}"))
+(let $inl1__lambda__3_div_8 (HBroadcast $inl1__lambda__3_broadcast_in_dim_3 "{0,1,2}"))
+(let $inl1__lambda__3_div_9 (HReshape $inl1__lambda__3_div_8 "f32[1,8]{1,0}"))
+(let $inl1__lambda__3_div_10 (HBroadcast $inl1__lambda__3_div_9 "{0,1}"))
+(let $inl1__lambda__3_div_11 (HDiv $inl1__lambda__3_exp_1 $inl1__lambda__3_div_10))
+(let $inl1__lambda__3_dot_general_7 (HDot $x_1 $p__params____v____kernel___1 "lhs_contracting_dims={2};rhs_contracting_dims={0}"))
+(let $inl1__lambda__3_dot_general_9 (HDot $inl1__lambda__3_div_11 $inl1__lambda__3_dot_general_7 "lhs_contracting_dims={2};rhs_contracting_dims={1};lhs_batch_dims={0};rhs_batch_dims={0}"))
+
+;; ----- flow_prune injected tiling rewrites -----
+(rewrite (HDot a c dt) (TiledHDot a c dt 32) :ruleset tiling)
+(rewrite (HDot a c dt) (TiledHDot a c dt 64) :ruleset tiling)
+(rewrite (HDot a c dt) (TiledHDot a c dt 128) :ruleset tiling)
+(rewrite (HConv a k ct) (TiledHConv a k ct 32) :ruleset tiling)
+(rewrite (HConv a k ct) (TiledHConv a k ct 64) :ruleset tiling)
+(rewrite (HConv a k ct) (TiledHConv a k ct 128) :ruleset tiling)
+
+;; ----- flow_prune two-phase schedule -----
+(run-schedule
+  (repeat 1 (run algebraic))
+  (run tiling))

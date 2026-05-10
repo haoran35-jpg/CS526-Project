@@ -1,0 +1,55 @@
+HloModule jit__lambda, entry_computation_layout={(f32[16,16]{1,0}, f32[16,16]{1,0}, f32[16,16]{1,0}, f32[1,8,16]{2,1,0})->f32[1,8,16]{2,1,0}}
+
+region_0.1 {
+  reduce_max.3 = f32[] parameter(0)
+  reduce_max.4 = f32[] parameter(1)
+  ROOT reduce_max.5 = f32[] maximum(reduce_max.3, reduce_max.4)
+}
+
+region_1.2 {
+  reduce_sum.3 = f32[] parameter(0)
+  reduce_sum.4 = f32[] parameter(1)
+  ROOT reduce_sum.5 = f32[] add(reduce_sum.3, reduce_sum.4)
+}
+
+_lambda_.3 {
+  Arg_3.1 = f32[1,8,16]{2,1,0} parameter(3)
+  Arg_1.1 = f32[16,16]{1,0} parameter(1)
+  dot_general.5 = f32[1,8,16]{2,1,0} dot(Arg_3.1, Arg_1.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_0.1 = f32[16,16]{1,0} parameter(0)
+  dot_general.6 = f32[1,8,16]{2,1,0} dot(Arg_3.1, Arg_0.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.8 = f32[1,8,8]{2,1,0} dot(dot_general.5, dot_general.6), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={2}
+  constant.5 = f32[] constant(4)
+  div.6 = f32[1,8,8]{2,1,0} broadcast(constant.5), dimensions={}
+  div.7 = f32[1,8,8]{2,1,0} divide(dot_general.8, div.6)
+  constant.7 = f32[] constant(-inf)
+  reduce_max.7 = f32[1,8]{1,0} reduce(div.7, constant.7), dimensions={2}, to_apply=region_0.1
+  constant.4 = f32[] constant(-inf)
+  broadcast.1 = f32[1,8]{1,0} broadcast(constant.4), dimensions={}
+  max.1 = f32[1,8]{1,0} maximum(reduce_max.7, broadcast.1)
+  broadcast_in_dim.2 = f32[1,8,1]{2,1,0} reshape(max.1)
+  sub.4 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.2), dimensions={0,1,2}
+  sub.5 = f32[1,8]{1,0} reshape(sub.4)
+  sub.6 = f32[1,8,8]{2,1,0} broadcast(sub.5), dimensions={0,1}
+  sub.7 = f32[1,8,8]{2,1,0} subtract(div.7, sub.6)
+  exp.1 = f32[1,8,8]{2,1,0} exponential(sub.7)
+  constant.6 = f32[] constant(0)
+  reduce_sum.7 = f32[1,8]{1,0} reduce(exp.1, constant.6), dimensions={2}, to_apply=region_1.2
+  broadcast_in_dim.3 = f32[1,8,1]{2,1,0} reshape(reduce_sum.7)
+  div.8 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.3), dimensions={0,1,2}
+  div.9 = f32[1,8]{1,0} reshape(div.8)
+  div.10 = f32[1,8,8]{2,1,0} broadcast(div.9), dimensions={0,1}
+  div.11 = f32[1,8,8]{2,1,0} divide(exp.1, div.10)
+  Arg_2.1 = f32[16,16]{1,0} parameter(2)
+  dot_general.7 = f32[1,8,16]{2,1,0} dot(Arg_3.1, Arg_2.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  ROOT dot_general.9 = f32[1,8,16]{2,1,0} dot(div.11, dot_general.7), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={1}
+}
+
+ENTRY main.4 {
+  p__params____k____kernel__.1 = f32[16,16]{1,0} parameter(0)
+  p__params____q____kernel__.1 = f32[16,16]{1,0} parameter(1)
+  p__params____v____kernel__.1 = f32[16,16]{1,0} parameter(2)
+  x.1 = f32[1,8,16]{2,1,0} parameter(3)
+  ROOT jit__lambda__.1 = f32[1,8,16]{2,1,0} call(p__params____k____kernel__.1, p__params____q____kernel__.1, p__params____v____kernel__.1, x.1), to_apply=_lambda_.3
+}
+

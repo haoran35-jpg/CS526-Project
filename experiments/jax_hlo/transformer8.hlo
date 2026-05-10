@@ -1,0 +1,1254 @@
+HloModule jit__lambda, entry_computation_layout={(f32[16,16]{1,0}, f32[16,16]{1,0}, f32[16,16]{1,0}, f32[32]{0}, f32[16,32]{1,0}, /*index=5*/f32[16]{0}, f32[32,16]{1,0}, f32[16]{0}, f32[16]{0}, f32[16]{0}, /*index=10*/f32[16]{0}, f32[16,16]{1,0}, f32[16,16]{1,0}, f32[16,16]{1,0}, f32[32]{0}, /*index=15*/f32[16,32]{1,0}, f32[16]{0}, f32[32,16]{1,0}, f32[16]{0}, f32[16]{0}, /*index=20*/f32[16]{0}, f32[16]{0}, f32[16,16]{1,0}, f32[16,16]{1,0}, f32[16,16]{1,0}, /*index=25*/f32[32]{0}, f32[16,32]{1,0}, f32[16]{0}, f32[32,16]{1,0}, f32[16]{0}, /*index=30*/f32[16]{0}, f32[16]{0}, f32[16]{0}, f32[16,16]{1,0}, f32[16,16]{1,0}, /*index=35*/f32[16,16]{1,0}, f32[32]{0}, f32[16,32]{1,0}, f32[16]{0}, f32[32,16]{1,0}, /*index=40*/f32[16]{0}, f32[16]{0}, f32[16]{0}, f32[16]{0}, f32[16,16]{1,0}, /*index=45*/f32[16,16]{1,0}, f32[16,16]{1,0}, f32[32]{0}, f32[16,32]{1,0}, f32[16]{0}, /*index=50*/f32[32,16]{1,0}, f32[16]{0}, f32[16]{0}, f32[16]{0}, f32[16]{0}, /*index=55*/f32[16,16]{1,0}, f32[16,16]{1,0}, f32[16,16]{1,0}, f32[32]{0}, f32[16,32]{1,0}, /*index=60*/f32[16]{0}, f32[32,16]{1,0}, f32[16]{0}, f32[16]{0}, f32[16]{0}, /*index=65*/f32[16]{0}, f32[16,16]{1,0}, f32[16,16]{1,0}, f32[16,16]{1,0}, f32[32]{0}, /*index=70*/f32[16,32]{1,0}, f32[16]{0}, f32[32,16]{1,0}, f32[16]{0}, f32[16]{0}, /*index=75*/f32[16]{0}, f32[16]{0}, f32[16,16]{1,0}, f32[16,16]{1,0}, f32[16,16]{1,0}, /*index=80*/f32[32]{0}, f32[16,32]{1,0}, f32[16]{0}, f32[32,16]{1,0}, f32[16]{0}, /*index=85*/f32[16]{0}, f32[16]{0}, f32[16]{0}, f32[1,8,16]{2,1,0})->f32[1,8,16]{2,1,0}}
+
+region_0.1 {
+  reduce_sum.3 = f32[] parameter(0)
+  reduce_sum.4 = f32[] parameter(1)
+  ROOT reduce_sum.5 = f32[] add(reduce_sum.3, reduce_sum.4)
+}
+
+region_1.2 {
+  reduce_sum.10 = f32[] parameter(0)
+  reduce_sum.11 = f32[] parameter(1)
+  ROOT reduce_sum.12 = f32[] add(reduce_sum.10, reduce_sum.11)
+}
+
+region_2.3 {
+  reduce_max.3 = f32[] parameter(0)
+  reduce_max.4 = f32[] parameter(1)
+  ROOT reduce_max.5 = f32[] maximum(reduce_max.3, reduce_max.4)
+}
+
+region_3.4 {
+  reduce_sum.17 = f32[] parameter(0)
+  reduce_sum.18 = f32[] parameter(1)
+  ROOT reduce_sum.19 = f32[] add(reduce_sum.17, reduce_sum.18)
+}
+
+region_4.5 {
+  reduce_sum.24 = f32[] parameter(0)
+  reduce_sum.25 = f32[] parameter(1)
+  ROOT reduce_sum.26 = f32[] add(reduce_sum.24, reduce_sum.25)
+}
+
+region_5.6 {
+  reduce_sum.31 = f32[] parameter(0)
+  reduce_sum.32 = f32[] parameter(1)
+  ROOT reduce_sum.33 = f32[] add(reduce_sum.31, reduce_sum.32)
+}
+
+relu.7 {
+  Arg_0.2 = f32[1,8,32]{2,1,0} parameter(0)
+  constant.8 = f32[] constant(0)
+  max.5 = f32[1,8,32]{2,1,0} broadcast(constant.8), dimensions={}
+  ROOT max.6 = f32[1,8,32]{2,1,0} maximum(Arg_0.2, max.5)
+}
+
+region_6.8 {
+  reduce_sum.38 = f32[] parameter(0)
+  reduce_sum.39 = f32[] parameter(1)
+  ROOT reduce_sum.40 = f32[] add(reduce_sum.38, reduce_sum.39)
+}
+
+region_7.9 {
+  reduce_sum.45 = f32[] parameter(0)
+  reduce_sum.46 = f32[] parameter(1)
+  ROOT reduce_sum.47 = f32[] add(reduce_sum.45, reduce_sum.46)
+}
+
+region_8.10 {
+  reduce_max.10 = f32[] parameter(0)
+  reduce_max.11 = f32[] parameter(1)
+  ROOT reduce_max.12 = f32[] maximum(reduce_max.10, reduce_max.11)
+}
+
+region_9.11 {
+  reduce_sum.52 = f32[] parameter(0)
+  reduce_sum.53 = f32[] parameter(1)
+  ROOT reduce_sum.54 = f32[] add(reduce_sum.52, reduce_sum.53)
+}
+
+region_10.12 {
+  reduce_sum.59 = f32[] parameter(0)
+  reduce_sum.60 = f32[] parameter(1)
+  ROOT reduce_sum.61 = f32[] add(reduce_sum.59, reduce_sum.60)
+}
+
+region_11.13 {
+  reduce_sum.66 = f32[] parameter(0)
+  reduce_sum.67 = f32[] parameter(1)
+  ROOT reduce_sum.68 = f32[] add(reduce_sum.66, reduce_sum.67)
+}
+
+region_12.14 {
+  reduce_sum.73 = f32[] parameter(0)
+  reduce_sum.74 = f32[] parameter(1)
+  ROOT reduce_sum.75 = f32[] add(reduce_sum.73, reduce_sum.74)
+}
+
+region_13.15 {
+  reduce_sum.80 = f32[] parameter(0)
+  reduce_sum.81 = f32[] parameter(1)
+  ROOT reduce_sum.82 = f32[] add(reduce_sum.80, reduce_sum.81)
+}
+
+region_14.16 {
+  reduce_max.17 = f32[] parameter(0)
+  reduce_max.18 = f32[] parameter(1)
+  ROOT reduce_max.19 = f32[] maximum(reduce_max.17, reduce_max.18)
+}
+
+region_15.17 {
+  reduce_sum.87 = f32[] parameter(0)
+  reduce_sum.88 = f32[] parameter(1)
+  ROOT reduce_sum.89 = f32[] add(reduce_sum.87, reduce_sum.88)
+}
+
+region_16.18 {
+  reduce_sum.94 = f32[] parameter(0)
+  reduce_sum.95 = f32[] parameter(1)
+  ROOT reduce_sum.96 = f32[] add(reduce_sum.94, reduce_sum.95)
+}
+
+region_17.19 {
+  reduce_sum.101 = f32[] parameter(0)
+  reduce_sum.102 = f32[] parameter(1)
+  ROOT reduce_sum.103 = f32[] add(reduce_sum.101, reduce_sum.102)
+}
+
+region_18.20 {
+  reduce_sum.108 = f32[] parameter(0)
+  reduce_sum.109 = f32[] parameter(1)
+  ROOT reduce_sum.110 = f32[] add(reduce_sum.108, reduce_sum.109)
+}
+
+region_19.21 {
+  reduce_sum.115 = f32[] parameter(0)
+  reduce_sum.116 = f32[] parameter(1)
+  ROOT reduce_sum.117 = f32[] add(reduce_sum.115, reduce_sum.116)
+}
+
+region_20.22 {
+  reduce_max.24 = f32[] parameter(0)
+  reduce_max.25 = f32[] parameter(1)
+  ROOT reduce_max.26 = f32[] maximum(reduce_max.24, reduce_max.25)
+}
+
+region_21.23 {
+  reduce_sum.122 = f32[] parameter(0)
+  reduce_sum.123 = f32[] parameter(1)
+  ROOT reduce_sum.124 = f32[] add(reduce_sum.122, reduce_sum.123)
+}
+
+region_22.24 {
+  reduce_sum.129 = f32[] parameter(0)
+  reduce_sum.130 = f32[] parameter(1)
+  ROOT reduce_sum.131 = f32[] add(reduce_sum.129, reduce_sum.130)
+}
+
+region_23.25 {
+  reduce_sum.136 = f32[] parameter(0)
+  reduce_sum.137 = f32[] parameter(1)
+  ROOT reduce_sum.138 = f32[] add(reduce_sum.136, reduce_sum.137)
+}
+
+region_24.26 {
+  reduce_sum.143 = f32[] parameter(0)
+  reduce_sum.144 = f32[] parameter(1)
+  ROOT reduce_sum.145 = f32[] add(reduce_sum.143, reduce_sum.144)
+}
+
+region_25.27 {
+  reduce_sum.150 = f32[] parameter(0)
+  reduce_sum.151 = f32[] parameter(1)
+  ROOT reduce_sum.152 = f32[] add(reduce_sum.150, reduce_sum.151)
+}
+
+region_26.28 {
+  reduce_max.31 = f32[] parameter(0)
+  reduce_max.32 = f32[] parameter(1)
+  ROOT reduce_max.33 = f32[] maximum(reduce_max.31, reduce_max.32)
+}
+
+region_27.29 {
+  reduce_sum.157 = f32[] parameter(0)
+  reduce_sum.158 = f32[] parameter(1)
+  ROOT reduce_sum.159 = f32[] add(reduce_sum.157, reduce_sum.158)
+}
+
+region_28.30 {
+  reduce_sum.164 = f32[] parameter(0)
+  reduce_sum.165 = f32[] parameter(1)
+  ROOT reduce_sum.166 = f32[] add(reduce_sum.164, reduce_sum.165)
+}
+
+region_29.31 {
+  reduce_sum.171 = f32[] parameter(0)
+  reduce_sum.172 = f32[] parameter(1)
+  ROOT reduce_sum.173 = f32[] add(reduce_sum.171, reduce_sum.172)
+}
+
+region_30.32 {
+  reduce_sum.178 = f32[] parameter(0)
+  reduce_sum.179 = f32[] parameter(1)
+  ROOT reduce_sum.180 = f32[] add(reduce_sum.178, reduce_sum.179)
+}
+
+region_31.33 {
+  reduce_sum.185 = f32[] parameter(0)
+  reduce_sum.186 = f32[] parameter(1)
+  ROOT reduce_sum.187 = f32[] add(reduce_sum.185, reduce_sum.186)
+}
+
+region_32.34 {
+  reduce_max.38 = f32[] parameter(0)
+  reduce_max.39 = f32[] parameter(1)
+  ROOT reduce_max.40 = f32[] maximum(reduce_max.38, reduce_max.39)
+}
+
+region_33.35 {
+  reduce_sum.192 = f32[] parameter(0)
+  reduce_sum.193 = f32[] parameter(1)
+  ROOT reduce_sum.194 = f32[] add(reduce_sum.192, reduce_sum.193)
+}
+
+region_34.36 {
+  reduce_sum.199 = f32[] parameter(0)
+  reduce_sum.200 = f32[] parameter(1)
+  ROOT reduce_sum.201 = f32[] add(reduce_sum.199, reduce_sum.200)
+}
+
+region_35.37 {
+  reduce_sum.206 = f32[] parameter(0)
+  reduce_sum.207 = f32[] parameter(1)
+  ROOT reduce_sum.208 = f32[] add(reduce_sum.206, reduce_sum.207)
+}
+
+region_36.38 {
+  reduce_sum.213 = f32[] parameter(0)
+  reduce_sum.214 = f32[] parameter(1)
+  ROOT reduce_sum.215 = f32[] add(reduce_sum.213, reduce_sum.214)
+}
+
+region_37.39 {
+  reduce_sum.220 = f32[] parameter(0)
+  reduce_sum.221 = f32[] parameter(1)
+  ROOT reduce_sum.222 = f32[] add(reduce_sum.220, reduce_sum.221)
+}
+
+region_38.40 {
+  reduce_max.45 = f32[] parameter(0)
+  reduce_max.46 = f32[] parameter(1)
+  ROOT reduce_max.47 = f32[] maximum(reduce_max.45, reduce_max.46)
+}
+
+region_39.41 {
+  reduce_sum.227 = f32[] parameter(0)
+  reduce_sum.228 = f32[] parameter(1)
+  ROOT reduce_sum.229 = f32[] add(reduce_sum.227, reduce_sum.228)
+}
+
+region_40.42 {
+  reduce_sum.234 = f32[] parameter(0)
+  reduce_sum.235 = f32[] parameter(1)
+  ROOT reduce_sum.236 = f32[] add(reduce_sum.234, reduce_sum.235)
+}
+
+region_41.43 {
+  reduce_sum.241 = f32[] parameter(0)
+  reduce_sum.242 = f32[] parameter(1)
+  ROOT reduce_sum.243 = f32[] add(reduce_sum.241, reduce_sum.242)
+}
+
+region_42.44 {
+  reduce_sum.248 = f32[] parameter(0)
+  reduce_sum.249 = f32[] parameter(1)
+  ROOT reduce_sum.250 = f32[] add(reduce_sum.248, reduce_sum.249)
+}
+
+region_43.45 {
+  reduce_sum.255 = f32[] parameter(0)
+  reduce_sum.256 = f32[] parameter(1)
+  ROOT reduce_sum.257 = f32[] add(reduce_sum.255, reduce_sum.256)
+}
+
+region_44.46 {
+  reduce_max.52 = f32[] parameter(0)
+  reduce_max.53 = f32[] parameter(1)
+  ROOT reduce_max.54 = f32[] maximum(reduce_max.52, reduce_max.53)
+}
+
+region_45.47 {
+  reduce_sum.262 = f32[] parameter(0)
+  reduce_sum.263 = f32[] parameter(1)
+  ROOT reduce_sum.264 = f32[] add(reduce_sum.262, reduce_sum.263)
+}
+
+region_46.48 {
+  reduce_sum.269 = f32[] parameter(0)
+  reduce_sum.270 = f32[] parameter(1)
+  ROOT reduce_sum.271 = f32[] add(reduce_sum.269, reduce_sum.270)
+}
+
+region_47.49 {
+  reduce_sum.276 = f32[] parameter(0)
+  reduce_sum.277 = f32[] parameter(1)
+  ROOT reduce_sum.278 = f32[] add(reduce_sum.276, reduce_sum.277)
+}
+
+_lambda_.50 {
+  Arg_88.1 = f32[1,8,16]{2,1,0} parameter(88)
+  constant.15 = f32[] constant(0)
+  reduce_sum.280 = f32[1,8]{1,0} reduce(Arg_88.1, constant.15), dimensions={2}, to_apply=region_0.1
+  constant.13 = f32[] constant(16)
+  broadcast.9 = f32[1,8]{1,0} broadcast(constant.13), dimensions={}
+  div.72 = f32[1,8]{1,0} divide(reduce_sum.280, broadcast.9)
+  broadcast_in_dim.48 = f32[1,8,1]{2,1,0} reshape(div.72)
+  sub.113 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.48), dimensions={0,1,2}
+  sub.114 = f32[1,8]{1,0} reshape(sub.113)
+  sub.115 = f32[1,8,16]{2,1,0} broadcast(sub.114), dimensions={0,1}
+  sub.116 = f32[1,8,16]{2,1,0} subtract(Arg_88.1, sub.115)
+  square.32 = f32[1,8,16]{2,1,0} multiply(Arg_88.1, Arg_88.1)
+  reduce_sum.281 = f32[1,8]{1,0} reduce(square.32, constant.15), dimensions={2}, to_apply=region_1.2
+  div.73 = f32[1,8]{1,0} divide(reduce_sum.281, broadcast.9)
+  square.33 = f32[1,8]{1,0} multiply(div.72, div.72)
+  sub.112 = f32[1,8]{1,0} subtract(div.73, square.33)
+  constant.12 = f32[] constant(0)
+  broadcast.8 = f32[1,8]{1,0} broadcast(constant.12), dimensions={}
+  max.28 = f32[1,8]{1,0} maximum(sub.112, broadcast.8)
+  broadcast_in_dim.49 = f32[1,8,1]{2,1,0} reshape(max.28)
+  constant.11 = f32[] constant(1e-06)
+  broadcast.7 = f32[1,8,1]{2,1,0} broadcast(constant.11), dimensions={}
+  add.160 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.49, broadcast.7)
+  rsqrt.16 = f32[1,8,1]{2,1,0} rsqrt(add.160)
+  mul.128 = f32[1,8,1]{2,1,0} broadcast(rsqrt.16), dimensions={0,1,2}
+  mul.129 = f32[1,8]{1,0} reshape(mul.128)
+  mul.130 = f32[1,8,16]{2,1,0} broadcast(mul.129), dimensions={0,1}
+  Arg_8.1 = f32[16]{0} parameter(8)
+  reshape.48 = f32[1,1,16]{2,1,0} reshape(Arg_8.1)
+  mul.131 = f32[1,1,16]{2,1,0} broadcast(reshape.48), dimensions={0,1,2}
+  mul.132 = f32[1,16]{1,0} reshape(mul.131)
+  mul.133 = f32[1,8,16]{2,1,0} broadcast(mul.132), dimensions={0,2}
+  mul.134 = f32[1,8,16]{2,1,0} multiply(mul.130, mul.133)
+  mul.135 = f32[1,8,16]{2,1,0} multiply(sub.116, mul.134)
+  Arg_7.1 = f32[16]{0} parameter(7)
+  reshape.49 = f32[1,1,16]{2,1,0} reshape(Arg_7.1)
+  add.161 = f32[1,1,16]{2,1,0} broadcast(reshape.49), dimensions={0,1,2}
+  add.162 = f32[1,16]{1,0} reshape(add.161)
+  add.163 = f32[1,8,16]{2,1,0} broadcast(add.162), dimensions={0,2}
+  add.164 = f32[1,8,16]{2,1,0} add(mul.135, add.163)
+  Arg_1.1 = f32[16,16]{1,0} parameter(1)
+  dot_general.56 = f32[1,8,16]{2,1,0} dot(add.164, Arg_1.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_0.3 = f32[16,16]{1,0} parameter(0)
+  dot_general.57 = f32[1,8,16]{2,1,0} dot(add.164, Arg_0.3), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.59 = f32[1,8,8]{2,1,0} dot(dot_general.56, dot_general.57), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={2}
+  constant.10 = f32[] constant(4)
+  broadcast.6 = f32[1,8,8]{2,1,0} broadcast(constant.10), dimensions={}
+  div.74 = f32[1,8,8]{2,1,0} divide(dot_general.59, broadcast.6)
+  constant.14 = f32[] constant(-inf)
+  reduce_max.56 = f32[1,8]{1,0} reduce(div.74, constant.14), dimensions={2}, to_apply=region_2.3
+  constant.9 = f32[] constant(-inf)
+  broadcast.5 = f32[1,8]{1,0} broadcast(constant.9), dimensions={}
+  max.29 = f32[1,8]{1,0} maximum(reduce_max.56, broadcast.5)
+  broadcast_in_dim.50 = f32[1,8,1]{2,1,0} reshape(max.29)
+  sub.117 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.50), dimensions={0,1,2}
+  sub.118 = f32[1,8]{1,0} reshape(sub.117)
+  sub.119 = f32[1,8,8]{2,1,0} broadcast(sub.118), dimensions={0,1}
+  sub.120 = f32[1,8,8]{2,1,0} subtract(div.74, sub.119)
+  exp.8 = f32[1,8,8]{2,1,0} exponential(sub.120)
+  reduce_sum.282 = f32[1,8]{1,0} reduce(exp.8, constant.15), dimensions={2}, to_apply=region_3.4
+  broadcast_in_dim.51 = f32[1,8,1]{2,1,0} reshape(reduce_sum.282)
+  div.75 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.51), dimensions={0,1,2}
+  div.76 = f32[1,8]{1,0} reshape(div.75)
+  div.77 = f32[1,8,8]{2,1,0} broadcast(div.76), dimensions={0,1}
+  div.78 = f32[1,8,8]{2,1,0} divide(exp.8, div.77)
+  Arg_2.1 = f32[16,16]{1,0} parameter(2)
+  dot_general.58 = f32[1,8,16]{2,1,0} dot(add.164, Arg_2.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.60 = f32[1,8,16]{2,1,0} dot(div.78, dot_general.58), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={1}
+  add.165 = f32[1,8,16]{2,1,0} add(Arg_88.1, dot_general.60)
+  reduce_sum.283 = f32[1,8]{1,0} reduce(add.165, constant.15), dimensions={2}, to_apply=region_4.5
+  div.79 = f32[1,8]{1,0} divide(reduce_sum.283, broadcast.9)
+  broadcast_in_dim.52 = f32[1,8,1]{2,1,0} reshape(div.79)
+  sub.122 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.52), dimensions={0,1,2}
+  sub.123 = f32[1,8]{1,0} reshape(sub.122)
+  sub.124 = f32[1,8,16]{2,1,0} broadcast(sub.123), dimensions={0,1}
+  sub.125 = f32[1,8,16]{2,1,0} subtract(add.165, sub.124)
+  square.34 = f32[1,8,16]{2,1,0} multiply(add.165, add.165)
+  reduce_sum.284 = f32[1,8]{1,0} reduce(square.34, constant.15), dimensions={2}, to_apply=region_5.6
+  div.80 = f32[1,8]{1,0} divide(reduce_sum.284, broadcast.9)
+  square.35 = f32[1,8]{1,0} multiply(div.79, div.79)
+  sub.121 = f32[1,8]{1,0} subtract(div.80, square.35)
+  max.30 = f32[1,8]{1,0} maximum(sub.121, broadcast.8)
+  broadcast_in_dim.53 = f32[1,8,1]{2,1,0} reshape(max.30)
+  add.166 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.53, broadcast.7)
+  rsqrt.17 = f32[1,8,1]{2,1,0} rsqrt(add.166)
+  mul.136 = f32[1,8,1]{2,1,0} broadcast(rsqrt.17), dimensions={0,1,2}
+  mul.137 = f32[1,8]{1,0} reshape(mul.136)
+  mul.138 = f32[1,8,16]{2,1,0} broadcast(mul.137), dimensions={0,1}
+  Arg_10.1 = f32[16]{0} parameter(10)
+  reshape.50 = f32[1,1,16]{2,1,0} reshape(Arg_10.1)
+  mul.139 = f32[1,1,16]{2,1,0} broadcast(reshape.50), dimensions={0,1,2}
+  mul.140 = f32[1,16]{1,0} reshape(mul.139)
+  mul.141 = f32[1,8,16]{2,1,0} broadcast(mul.140), dimensions={0,2}
+  mul.142 = f32[1,8,16]{2,1,0} multiply(mul.138, mul.141)
+  mul.143 = f32[1,8,16]{2,1,0} multiply(sub.125, mul.142)
+  Arg_9.1 = f32[16]{0} parameter(9)
+  reshape.51 = f32[1,1,16]{2,1,0} reshape(Arg_9.1)
+  add.167 = f32[1,1,16]{2,1,0} broadcast(reshape.51), dimensions={0,1,2}
+  add.168 = f32[1,16]{1,0} reshape(add.167)
+  add.169 = f32[1,8,16]{2,1,0} broadcast(add.168), dimensions={0,2}
+  add.170 = f32[1,8,16]{2,1,0} add(mul.143, add.169)
+  Arg_4.1 = f32[16,32]{1,0} parameter(4)
+  dot_general.61 = f32[1,8,32]{2,1,0} dot(add.170, Arg_4.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_3.1 = f32[32]{0} parameter(3)
+  reshape.52 = f32[1,1,32]{2,1,0} reshape(Arg_3.1)
+  add.171 = f32[1,1,32]{2,1,0} broadcast(reshape.52), dimensions={0,1,2}
+  add.172 = f32[1,32]{1,0} reshape(add.171)
+  add.173 = f32[1,8,32]{2,1,0} broadcast(add.172), dimensions={0,2}
+  add.174 = f32[1,8,32]{2,1,0} add(dot_general.61, add.173)
+  jit_relu_.8 = f32[1,8,32]{2,1,0} call(add.174), to_apply=relu.7
+  Arg_6.1 = f32[32,16]{1,0} parameter(6)
+  dot_general.62 = f32[1,8,16]{2,1,0} dot(jit_relu_.8, Arg_6.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_5.1 = f32[16]{0} parameter(5)
+  reshape.53 = f32[1,1,16]{2,1,0} reshape(Arg_5.1)
+  add.175 = f32[1,1,16]{2,1,0} broadcast(reshape.53), dimensions={0,1,2}
+  add.176 = f32[1,16]{1,0} reshape(add.175)
+  add.177 = f32[1,8,16]{2,1,0} broadcast(add.176), dimensions={0,2}
+  add.178 = f32[1,8,16]{2,1,0} add(dot_general.62, add.177)
+  add.179 = f32[1,8,16]{2,1,0} add(add.165, add.178)
+  reduce_sum.285 = f32[1,8]{1,0} reduce(add.179, constant.15), dimensions={2}, to_apply=region_6.8
+  div.81 = f32[1,8]{1,0} divide(reduce_sum.285, broadcast.9)
+  broadcast_in_dim.54 = f32[1,8,1]{2,1,0} reshape(div.81)
+  sub.127 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.54), dimensions={0,1,2}
+  sub.128 = f32[1,8]{1,0} reshape(sub.127)
+  sub.129 = f32[1,8,16]{2,1,0} broadcast(sub.128), dimensions={0,1}
+  sub.130 = f32[1,8,16]{2,1,0} subtract(add.179, sub.129)
+  square.36 = f32[1,8,16]{2,1,0} multiply(add.179, add.179)
+  reduce_sum.286 = f32[1,8]{1,0} reduce(square.36, constant.15), dimensions={2}, to_apply=region_7.9
+  div.82 = f32[1,8]{1,0} divide(reduce_sum.286, broadcast.9)
+  square.37 = f32[1,8]{1,0} multiply(div.81, div.81)
+  sub.126 = f32[1,8]{1,0} subtract(div.82, square.37)
+  max.31 = f32[1,8]{1,0} maximum(sub.126, broadcast.8)
+  broadcast_in_dim.55 = f32[1,8,1]{2,1,0} reshape(max.31)
+  add.180 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.55, broadcast.7)
+  rsqrt.18 = f32[1,8,1]{2,1,0} rsqrt(add.180)
+  mul.144 = f32[1,8,1]{2,1,0} broadcast(rsqrt.18), dimensions={0,1,2}
+  mul.145 = f32[1,8]{1,0} reshape(mul.144)
+  mul.146 = f32[1,8,16]{2,1,0} broadcast(mul.145), dimensions={0,1}
+  Arg_19.1 = f32[16]{0} parameter(19)
+  reshape.54 = f32[1,1,16]{2,1,0} reshape(Arg_19.1)
+  mul.147 = f32[1,1,16]{2,1,0} broadcast(reshape.54), dimensions={0,1,2}
+  mul.148 = f32[1,16]{1,0} reshape(mul.147)
+  mul.149 = f32[1,8,16]{2,1,0} broadcast(mul.148), dimensions={0,2}
+  mul.150 = f32[1,8,16]{2,1,0} multiply(mul.146, mul.149)
+  mul.151 = f32[1,8,16]{2,1,0} multiply(sub.130, mul.150)
+  Arg_18.1 = f32[16]{0} parameter(18)
+  reshape.55 = f32[1,1,16]{2,1,0} reshape(Arg_18.1)
+  add.181 = f32[1,1,16]{2,1,0} broadcast(reshape.55), dimensions={0,1,2}
+  add.182 = f32[1,16]{1,0} reshape(add.181)
+  add.183 = f32[1,8,16]{2,1,0} broadcast(add.182), dimensions={0,2}
+  add.184 = f32[1,8,16]{2,1,0} add(mul.151, add.183)
+  Arg_12.1 = f32[16,16]{1,0} parameter(12)
+  dot_general.63 = f32[1,8,16]{2,1,0} dot(add.184, Arg_12.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_11.1 = f32[16,16]{1,0} parameter(11)
+  dot_general.64 = f32[1,8,16]{2,1,0} dot(add.184, Arg_11.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.66 = f32[1,8,8]{2,1,0} dot(dot_general.63, dot_general.64), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={2}
+  div.83 = f32[1,8,8]{2,1,0} divide(dot_general.66, broadcast.6)
+  reduce_max.57 = f32[1,8]{1,0} reduce(div.83, constant.14), dimensions={2}, to_apply=region_8.10
+  max.32 = f32[1,8]{1,0} maximum(reduce_max.57, broadcast.5)
+  broadcast_in_dim.56 = f32[1,8,1]{2,1,0} reshape(max.32)
+  sub.131 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.56), dimensions={0,1,2}
+  sub.132 = f32[1,8]{1,0} reshape(sub.131)
+  sub.133 = f32[1,8,8]{2,1,0} broadcast(sub.132), dimensions={0,1}
+  sub.134 = f32[1,8,8]{2,1,0} subtract(div.83, sub.133)
+  exp.9 = f32[1,8,8]{2,1,0} exponential(sub.134)
+  reduce_sum.287 = f32[1,8]{1,0} reduce(exp.9, constant.15), dimensions={2}, to_apply=region_9.11
+  broadcast_in_dim.57 = f32[1,8,1]{2,1,0} reshape(reduce_sum.287)
+  div.84 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.57), dimensions={0,1,2}
+  div.85 = f32[1,8]{1,0} reshape(div.84)
+  div.86 = f32[1,8,8]{2,1,0} broadcast(div.85), dimensions={0,1}
+  div.87 = f32[1,8,8]{2,1,0} divide(exp.9, div.86)
+  Arg_13.1 = f32[16,16]{1,0} parameter(13)
+  dot_general.65 = f32[1,8,16]{2,1,0} dot(add.184, Arg_13.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.67 = f32[1,8,16]{2,1,0} dot(div.87, dot_general.65), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={1}
+  add.185 = f32[1,8,16]{2,1,0} add(add.179, dot_general.67)
+  reduce_sum.288 = f32[1,8]{1,0} reduce(add.185, constant.15), dimensions={2}, to_apply=region_10.12
+  div.88 = f32[1,8]{1,0} divide(reduce_sum.288, broadcast.9)
+  broadcast_in_dim.58 = f32[1,8,1]{2,1,0} reshape(div.88)
+  sub.136 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.58), dimensions={0,1,2}
+  sub.137 = f32[1,8]{1,0} reshape(sub.136)
+  sub.138 = f32[1,8,16]{2,1,0} broadcast(sub.137), dimensions={0,1}
+  sub.139 = f32[1,8,16]{2,1,0} subtract(add.185, sub.138)
+  square.38 = f32[1,8,16]{2,1,0} multiply(add.185, add.185)
+  reduce_sum.289 = f32[1,8]{1,0} reduce(square.38, constant.15), dimensions={2}, to_apply=region_11.13
+  div.89 = f32[1,8]{1,0} divide(reduce_sum.289, broadcast.9)
+  square.39 = f32[1,8]{1,0} multiply(div.88, div.88)
+  sub.135 = f32[1,8]{1,0} subtract(div.89, square.39)
+  max.33 = f32[1,8]{1,0} maximum(sub.135, broadcast.8)
+  broadcast_in_dim.59 = f32[1,8,1]{2,1,0} reshape(max.33)
+  add.186 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.59, broadcast.7)
+  rsqrt.19 = f32[1,8,1]{2,1,0} rsqrt(add.186)
+  mul.152 = f32[1,8,1]{2,1,0} broadcast(rsqrt.19), dimensions={0,1,2}
+  mul.153 = f32[1,8]{1,0} reshape(mul.152)
+  mul.154 = f32[1,8,16]{2,1,0} broadcast(mul.153), dimensions={0,1}
+  Arg_21.1 = f32[16]{0} parameter(21)
+  reshape.56 = f32[1,1,16]{2,1,0} reshape(Arg_21.1)
+  mul.155 = f32[1,1,16]{2,1,0} broadcast(reshape.56), dimensions={0,1,2}
+  mul.156 = f32[1,16]{1,0} reshape(mul.155)
+  mul.157 = f32[1,8,16]{2,1,0} broadcast(mul.156), dimensions={0,2}
+  mul.158 = f32[1,8,16]{2,1,0} multiply(mul.154, mul.157)
+  mul.159 = f32[1,8,16]{2,1,0} multiply(sub.139, mul.158)
+  Arg_20.1 = f32[16]{0} parameter(20)
+  reshape.57 = f32[1,1,16]{2,1,0} reshape(Arg_20.1)
+  add.187 = f32[1,1,16]{2,1,0} broadcast(reshape.57), dimensions={0,1,2}
+  add.188 = f32[1,16]{1,0} reshape(add.187)
+  add.189 = f32[1,8,16]{2,1,0} broadcast(add.188), dimensions={0,2}
+  add.190 = f32[1,8,16]{2,1,0} add(mul.159, add.189)
+  Arg_15.1 = f32[16,32]{1,0} parameter(15)
+  dot_general.68 = f32[1,8,32]{2,1,0} dot(add.190, Arg_15.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_14.1 = f32[32]{0} parameter(14)
+  reshape.58 = f32[1,1,32]{2,1,0} reshape(Arg_14.1)
+  add.191 = f32[1,1,32]{2,1,0} broadcast(reshape.58), dimensions={0,1,2}
+  add.192 = f32[1,32]{1,0} reshape(add.191)
+  add.193 = f32[1,8,32]{2,1,0} broadcast(add.192), dimensions={0,2}
+  add.194 = f32[1,8,32]{2,1,0} add(dot_general.68, add.193)
+  jit_relu_.9 = f32[1,8,32]{2,1,0} call(add.194), to_apply=relu.7
+  Arg_17.1 = f32[32,16]{1,0} parameter(17)
+  dot_general.69 = f32[1,8,16]{2,1,0} dot(jit_relu_.9, Arg_17.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_16.1 = f32[16]{0} parameter(16)
+  reshape.59 = f32[1,1,16]{2,1,0} reshape(Arg_16.1)
+  add.195 = f32[1,1,16]{2,1,0} broadcast(reshape.59), dimensions={0,1,2}
+  add.196 = f32[1,16]{1,0} reshape(add.195)
+  add.197 = f32[1,8,16]{2,1,0} broadcast(add.196), dimensions={0,2}
+  add.198 = f32[1,8,16]{2,1,0} add(dot_general.69, add.197)
+  add.199 = f32[1,8,16]{2,1,0} add(add.185, add.198)
+  reduce_sum.290 = f32[1,8]{1,0} reduce(add.199, constant.15), dimensions={2}, to_apply=region_12.14
+  div.90 = f32[1,8]{1,0} divide(reduce_sum.290, broadcast.9)
+  broadcast_in_dim.60 = f32[1,8,1]{2,1,0} reshape(div.90)
+  sub.141 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.60), dimensions={0,1,2}
+  sub.142 = f32[1,8]{1,0} reshape(sub.141)
+  sub.143 = f32[1,8,16]{2,1,0} broadcast(sub.142), dimensions={0,1}
+  sub.144 = f32[1,8,16]{2,1,0} subtract(add.199, sub.143)
+  square.40 = f32[1,8,16]{2,1,0} multiply(add.199, add.199)
+  reduce_sum.291 = f32[1,8]{1,0} reduce(square.40, constant.15), dimensions={2}, to_apply=region_13.15
+  div.91 = f32[1,8]{1,0} divide(reduce_sum.291, broadcast.9)
+  square.41 = f32[1,8]{1,0} multiply(div.90, div.90)
+  sub.140 = f32[1,8]{1,0} subtract(div.91, square.41)
+  max.34 = f32[1,8]{1,0} maximum(sub.140, broadcast.8)
+  broadcast_in_dim.61 = f32[1,8,1]{2,1,0} reshape(max.34)
+  add.200 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.61, broadcast.7)
+  rsqrt.20 = f32[1,8,1]{2,1,0} rsqrt(add.200)
+  mul.160 = f32[1,8,1]{2,1,0} broadcast(rsqrt.20), dimensions={0,1,2}
+  mul.161 = f32[1,8]{1,0} reshape(mul.160)
+  mul.162 = f32[1,8,16]{2,1,0} broadcast(mul.161), dimensions={0,1}
+  Arg_30.1 = f32[16]{0} parameter(30)
+  reshape.60 = f32[1,1,16]{2,1,0} reshape(Arg_30.1)
+  mul.163 = f32[1,1,16]{2,1,0} broadcast(reshape.60), dimensions={0,1,2}
+  mul.164 = f32[1,16]{1,0} reshape(mul.163)
+  mul.165 = f32[1,8,16]{2,1,0} broadcast(mul.164), dimensions={0,2}
+  mul.166 = f32[1,8,16]{2,1,0} multiply(mul.162, mul.165)
+  mul.167 = f32[1,8,16]{2,1,0} multiply(sub.144, mul.166)
+  Arg_29.1 = f32[16]{0} parameter(29)
+  reshape.61 = f32[1,1,16]{2,1,0} reshape(Arg_29.1)
+  add.201 = f32[1,1,16]{2,1,0} broadcast(reshape.61), dimensions={0,1,2}
+  add.202 = f32[1,16]{1,0} reshape(add.201)
+  add.203 = f32[1,8,16]{2,1,0} broadcast(add.202), dimensions={0,2}
+  add.204 = f32[1,8,16]{2,1,0} add(mul.167, add.203)
+  Arg_23.1 = f32[16,16]{1,0} parameter(23)
+  dot_general.70 = f32[1,8,16]{2,1,0} dot(add.204, Arg_23.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_22.1 = f32[16,16]{1,0} parameter(22)
+  dot_general.71 = f32[1,8,16]{2,1,0} dot(add.204, Arg_22.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.73 = f32[1,8,8]{2,1,0} dot(dot_general.70, dot_general.71), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={2}
+  div.92 = f32[1,8,8]{2,1,0} divide(dot_general.73, broadcast.6)
+  reduce_max.58 = f32[1,8]{1,0} reduce(div.92, constant.14), dimensions={2}, to_apply=region_14.16
+  max.35 = f32[1,8]{1,0} maximum(reduce_max.58, broadcast.5)
+  broadcast_in_dim.62 = f32[1,8,1]{2,1,0} reshape(max.35)
+  sub.145 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.62), dimensions={0,1,2}
+  sub.146 = f32[1,8]{1,0} reshape(sub.145)
+  sub.147 = f32[1,8,8]{2,1,0} broadcast(sub.146), dimensions={0,1}
+  sub.148 = f32[1,8,8]{2,1,0} subtract(div.92, sub.147)
+  exp.10 = f32[1,8,8]{2,1,0} exponential(sub.148)
+  reduce_sum.292 = f32[1,8]{1,0} reduce(exp.10, constant.15), dimensions={2}, to_apply=region_15.17
+  broadcast_in_dim.63 = f32[1,8,1]{2,1,0} reshape(reduce_sum.292)
+  div.93 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.63), dimensions={0,1,2}
+  div.94 = f32[1,8]{1,0} reshape(div.93)
+  div.95 = f32[1,8,8]{2,1,0} broadcast(div.94), dimensions={0,1}
+  div.96 = f32[1,8,8]{2,1,0} divide(exp.10, div.95)
+  Arg_24.1 = f32[16,16]{1,0} parameter(24)
+  dot_general.72 = f32[1,8,16]{2,1,0} dot(add.204, Arg_24.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.74 = f32[1,8,16]{2,1,0} dot(div.96, dot_general.72), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={1}
+  add.205 = f32[1,8,16]{2,1,0} add(add.199, dot_general.74)
+  reduce_sum.293 = f32[1,8]{1,0} reduce(add.205, constant.15), dimensions={2}, to_apply=region_16.18
+  div.97 = f32[1,8]{1,0} divide(reduce_sum.293, broadcast.9)
+  broadcast_in_dim.64 = f32[1,8,1]{2,1,0} reshape(div.97)
+  sub.150 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.64), dimensions={0,1,2}
+  sub.151 = f32[1,8]{1,0} reshape(sub.150)
+  sub.152 = f32[1,8,16]{2,1,0} broadcast(sub.151), dimensions={0,1}
+  sub.153 = f32[1,8,16]{2,1,0} subtract(add.205, sub.152)
+  square.42 = f32[1,8,16]{2,1,0} multiply(add.205, add.205)
+  reduce_sum.294 = f32[1,8]{1,0} reduce(square.42, constant.15), dimensions={2}, to_apply=region_17.19
+  div.98 = f32[1,8]{1,0} divide(reduce_sum.294, broadcast.9)
+  square.43 = f32[1,8]{1,0} multiply(div.97, div.97)
+  sub.149 = f32[1,8]{1,0} subtract(div.98, square.43)
+  max.36 = f32[1,8]{1,0} maximum(sub.149, broadcast.8)
+  broadcast_in_dim.65 = f32[1,8,1]{2,1,0} reshape(max.36)
+  add.206 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.65, broadcast.7)
+  rsqrt.21 = f32[1,8,1]{2,1,0} rsqrt(add.206)
+  mul.168 = f32[1,8,1]{2,1,0} broadcast(rsqrt.21), dimensions={0,1,2}
+  mul.169 = f32[1,8]{1,0} reshape(mul.168)
+  mul.170 = f32[1,8,16]{2,1,0} broadcast(mul.169), dimensions={0,1}
+  Arg_32.1 = f32[16]{0} parameter(32)
+  reshape.62 = f32[1,1,16]{2,1,0} reshape(Arg_32.1)
+  mul.171 = f32[1,1,16]{2,1,0} broadcast(reshape.62), dimensions={0,1,2}
+  mul.172 = f32[1,16]{1,0} reshape(mul.171)
+  mul.173 = f32[1,8,16]{2,1,0} broadcast(mul.172), dimensions={0,2}
+  mul.174 = f32[1,8,16]{2,1,0} multiply(mul.170, mul.173)
+  mul.175 = f32[1,8,16]{2,1,0} multiply(sub.153, mul.174)
+  Arg_31.1 = f32[16]{0} parameter(31)
+  reshape.63 = f32[1,1,16]{2,1,0} reshape(Arg_31.1)
+  add.207 = f32[1,1,16]{2,1,0} broadcast(reshape.63), dimensions={0,1,2}
+  add.208 = f32[1,16]{1,0} reshape(add.207)
+  add.209 = f32[1,8,16]{2,1,0} broadcast(add.208), dimensions={0,2}
+  add.210 = f32[1,8,16]{2,1,0} add(mul.175, add.209)
+  Arg_26.1 = f32[16,32]{1,0} parameter(26)
+  dot_general.75 = f32[1,8,32]{2,1,0} dot(add.210, Arg_26.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_25.1 = f32[32]{0} parameter(25)
+  reshape.64 = f32[1,1,32]{2,1,0} reshape(Arg_25.1)
+  add.211 = f32[1,1,32]{2,1,0} broadcast(reshape.64), dimensions={0,1,2}
+  add.212 = f32[1,32]{1,0} reshape(add.211)
+  add.213 = f32[1,8,32]{2,1,0} broadcast(add.212), dimensions={0,2}
+  add.214 = f32[1,8,32]{2,1,0} add(dot_general.75, add.213)
+  jit_relu_.10 = f32[1,8,32]{2,1,0} call(add.214), to_apply=relu.7
+  Arg_28.1 = f32[32,16]{1,0} parameter(28)
+  dot_general.76 = f32[1,8,16]{2,1,0} dot(jit_relu_.10, Arg_28.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_27.1 = f32[16]{0} parameter(27)
+  reshape.65 = f32[1,1,16]{2,1,0} reshape(Arg_27.1)
+  add.215 = f32[1,1,16]{2,1,0} broadcast(reshape.65), dimensions={0,1,2}
+  add.216 = f32[1,16]{1,0} reshape(add.215)
+  add.217 = f32[1,8,16]{2,1,0} broadcast(add.216), dimensions={0,2}
+  add.218 = f32[1,8,16]{2,1,0} add(dot_general.76, add.217)
+  add.219 = f32[1,8,16]{2,1,0} add(add.205, add.218)
+  reduce_sum.295 = f32[1,8]{1,0} reduce(add.219, constant.15), dimensions={2}, to_apply=region_18.20
+  div.99 = f32[1,8]{1,0} divide(reduce_sum.295, broadcast.9)
+  broadcast_in_dim.66 = f32[1,8,1]{2,1,0} reshape(div.99)
+  sub.155 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.66), dimensions={0,1,2}
+  sub.156 = f32[1,8]{1,0} reshape(sub.155)
+  sub.157 = f32[1,8,16]{2,1,0} broadcast(sub.156), dimensions={0,1}
+  sub.158 = f32[1,8,16]{2,1,0} subtract(add.219, sub.157)
+  square.44 = f32[1,8,16]{2,1,0} multiply(add.219, add.219)
+  reduce_sum.296 = f32[1,8]{1,0} reduce(square.44, constant.15), dimensions={2}, to_apply=region_19.21
+  div.100 = f32[1,8]{1,0} divide(reduce_sum.296, broadcast.9)
+  square.45 = f32[1,8]{1,0} multiply(div.99, div.99)
+  sub.154 = f32[1,8]{1,0} subtract(div.100, square.45)
+  max.37 = f32[1,8]{1,0} maximum(sub.154, broadcast.8)
+  broadcast_in_dim.67 = f32[1,8,1]{2,1,0} reshape(max.37)
+  add.220 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.67, broadcast.7)
+  rsqrt.22 = f32[1,8,1]{2,1,0} rsqrt(add.220)
+  mul.176 = f32[1,8,1]{2,1,0} broadcast(rsqrt.22), dimensions={0,1,2}
+  mul.177 = f32[1,8]{1,0} reshape(mul.176)
+  mul.178 = f32[1,8,16]{2,1,0} broadcast(mul.177), dimensions={0,1}
+  Arg_41.1 = f32[16]{0} parameter(41)
+  reshape.66 = f32[1,1,16]{2,1,0} reshape(Arg_41.1)
+  mul.179 = f32[1,1,16]{2,1,0} broadcast(reshape.66), dimensions={0,1,2}
+  mul.180 = f32[1,16]{1,0} reshape(mul.179)
+  mul.181 = f32[1,8,16]{2,1,0} broadcast(mul.180), dimensions={0,2}
+  mul.182 = f32[1,8,16]{2,1,0} multiply(mul.178, mul.181)
+  mul.183 = f32[1,8,16]{2,1,0} multiply(sub.158, mul.182)
+  Arg_40.1 = f32[16]{0} parameter(40)
+  reshape.67 = f32[1,1,16]{2,1,0} reshape(Arg_40.1)
+  add.221 = f32[1,1,16]{2,1,0} broadcast(reshape.67), dimensions={0,1,2}
+  add.222 = f32[1,16]{1,0} reshape(add.221)
+  add.223 = f32[1,8,16]{2,1,0} broadcast(add.222), dimensions={0,2}
+  add.224 = f32[1,8,16]{2,1,0} add(mul.183, add.223)
+  Arg_34.1 = f32[16,16]{1,0} parameter(34)
+  dot_general.77 = f32[1,8,16]{2,1,0} dot(add.224, Arg_34.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_33.1 = f32[16,16]{1,0} parameter(33)
+  dot_general.78 = f32[1,8,16]{2,1,0} dot(add.224, Arg_33.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.80 = f32[1,8,8]{2,1,0} dot(dot_general.77, dot_general.78), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={2}
+  div.101 = f32[1,8,8]{2,1,0} divide(dot_general.80, broadcast.6)
+  reduce_max.59 = f32[1,8]{1,0} reduce(div.101, constant.14), dimensions={2}, to_apply=region_20.22
+  max.38 = f32[1,8]{1,0} maximum(reduce_max.59, broadcast.5)
+  broadcast_in_dim.68 = f32[1,8,1]{2,1,0} reshape(max.38)
+  sub.159 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.68), dimensions={0,1,2}
+  sub.160 = f32[1,8]{1,0} reshape(sub.159)
+  sub.161 = f32[1,8,8]{2,1,0} broadcast(sub.160), dimensions={0,1}
+  sub.162 = f32[1,8,8]{2,1,0} subtract(div.101, sub.161)
+  exp.11 = f32[1,8,8]{2,1,0} exponential(sub.162)
+  reduce_sum.297 = f32[1,8]{1,0} reduce(exp.11, constant.15), dimensions={2}, to_apply=region_21.23
+  broadcast_in_dim.69 = f32[1,8,1]{2,1,0} reshape(reduce_sum.297)
+  div.102 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.69), dimensions={0,1,2}
+  div.103 = f32[1,8]{1,0} reshape(div.102)
+  div.104 = f32[1,8,8]{2,1,0} broadcast(div.103), dimensions={0,1}
+  div.105 = f32[1,8,8]{2,1,0} divide(exp.11, div.104)
+  Arg_35.1 = f32[16,16]{1,0} parameter(35)
+  dot_general.79 = f32[1,8,16]{2,1,0} dot(add.224, Arg_35.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.81 = f32[1,8,16]{2,1,0} dot(div.105, dot_general.79), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={1}
+  add.225 = f32[1,8,16]{2,1,0} add(add.219, dot_general.81)
+  reduce_sum.298 = f32[1,8]{1,0} reduce(add.225, constant.15), dimensions={2}, to_apply=region_22.24
+  div.106 = f32[1,8]{1,0} divide(reduce_sum.298, broadcast.9)
+  broadcast_in_dim.70 = f32[1,8,1]{2,1,0} reshape(div.106)
+  sub.164 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.70), dimensions={0,1,2}
+  sub.165 = f32[1,8]{1,0} reshape(sub.164)
+  sub.166 = f32[1,8,16]{2,1,0} broadcast(sub.165), dimensions={0,1}
+  sub.167 = f32[1,8,16]{2,1,0} subtract(add.225, sub.166)
+  square.46 = f32[1,8,16]{2,1,0} multiply(add.225, add.225)
+  reduce_sum.299 = f32[1,8]{1,0} reduce(square.46, constant.15), dimensions={2}, to_apply=region_23.25
+  div.107 = f32[1,8]{1,0} divide(reduce_sum.299, broadcast.9)
+  square.47 = f32[1,8]{1,0} multiply(div.106, div.106)
+  sub.163 = f32[1,8]{1,0} subtract(div.107, square.47)
+  max.39 = f32[1,8]{1,0} maximum(sub.163, broadcast.8)
+  broadcast_in_dim.71 = f32[1,8,1]{2,1,0} reshape(max.39)
+  add.226 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.71, broadcast.7)
+  rsqrt.23 = f32[1,8,1]{2,1,0} rsqrt(add.226)
+  mul.184 = f32[1,8,1]{2,1,0} broadcast(rsqrt.23), dimensions={0,1,2}
+  mul.185 = f32[1,8]{1,0} reshape(mul.184)
+  mul.186 = f32[1,8,16]{2,1,0} broadcast(mul.185), dimensions={0,1}
+  Arg_43.1 = f32[16]{0} parameter(43)
+  reshape.68 = f32[1,1,16]{2,1,0} reshape(Arg_43.1)
+  mul.187 = f32[1,1,16]{2,1,0} broadcast(reshape.68), dimensions={0,1,2}
+  mul.188 = f32[1,16]{1,0} reshape(mul.187)
+  mul.189 = f32[1,8,16]{2,1,0} broadcast(mul.188), dimensions={0,2}
+  mul.190 = f32[1,8,16]{2,1,0} multiply(mul.186, mul.189)
+  mul.191 = f32[1,8,16]{2,1,0} multiply(sub.167, mul.190)
+  Arg_42.1 = f32[16]{0} parameter(42)
+  reshape.69 = f32[1,1,16]{2,1,0} reshape(Arg_42.1)
+  add.227 = f32[1,1,16]{2,1,0} broadcast(reshape.69), dimensions={0,1,2}
+  add.228 = f32[1,16]{1,0} reshape(add.227)
+  add.229 = f32[1,8,16]{2,1,0} broadcast(add.228), dimensions={0,2}
+  add.230 = f32[1,8,16]{2,1,0} add(mul.191, add.229)
+  Arg_37.1 = f32[16,32]{1,0} parameter(37)
+  dot_general.82 = f32[1,8,32]{2,1,0} dot(add.230, Arg_37.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_36.1 = f32[32]{0} parameter(36)
+  reshape.70 = f32[1,1,32]{2,1,0} reshape(Arg_36.1)
+  add.231 = f32[1,1,32]{2,1,0} broadcast(reshape.70), dimensions={0,1,2}
+  add.232 = f32[1,32]{1,0} reshape(add.231)
+  add.233 = f32[1,8,32]{2,1,0} broadcast(add.232), dimensions={0,2}
+  add.234 = f32[1,8,32]{2,1,0} add(dot_general.82, add.233)
+  jit_relu_.11 = f32[1,8,32]{2,1,0} call(add.234), to_apply=relu.7
+  Arg_39.1 = f32[32,16]{1,0} parameter(39)
+  dot_general.83 = f32[1,8,16]{2,1,0} dot(jit_relu_.11, Arg_39.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_38.1 = f32[16]{0} parameter(38)
+  reshape.71 = f32[1,1,16]{2,1,0} reshape(Arg_38.1)
+  add.235 = f32[1,1,16]{2,1,0} broadcast(reshape.71), dimensions={0,1,2}
+  add.236 = f32[1,16]{1,0} reshape(add.235)
+  add.237 = f32[1,8,16]{2,1,0} broadcast(add.236), dimensions={0,2}
+  add.238 = f32[1,8,16]{2,1,0} add(dot_general.83, add.237)
+  add.239 = f32[1,8,16]{2,1,0} add(add.225, add.238)
+  reduce_sum.300 = f32[1,8]{1,0} reduce(add.239, constant.15), dimensions={2}, to_apply=region_24.26
+  div.108 = f32[1,8]{1,0} divide(reduce_sum.300, broadcast.9)
+  broadcast_in_dim.72 = f32[1,8,1]{2,1,0} reshape(div.108)
+  sub.169 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.72), dimensions={0,1,2}
+  sub.170 = f32[1,8]{1,0} reshape(sub.169)
+  sub.171 = f32[1,8,16]{2,1,0} broadcast(sub.170), dimensions={0,1}
+  sub.172 = f32[1,8,16]{2,1,0} subtract(add.239, sub.171)
+  square.48 = f32[1,8,16]{2,1,0} multiply(add.239, add.239)
+  reduce_sum.301 = f32[1,8]{1,0} reduce(square.48, constant.15), dimensions={2}, to_apply=region_25.27
+  div.109 = f32[1,8]{1,0} divide(reduce_sum.301, broadcast.9)
+  square.49 = f32[1,8]{1,0} multiply(div.108, div.108)
+  sub.168 = f32[1,8]{1,0} subtract(div.109, square.49)
+  max.40 = f32[1,8]{1,0} maximum(sub.168, broadcast.8)
+  broadcast_in_dim.73 = f32[1,8,1]{2,1,0} reshape(max.40)
+  add.240 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.73, broadcast.7)
+  rsqrt.24 = f32[1,8,1]{2,1,0} rsqrt(add.240)
+  mul.192 = f32[1,8,1]{2,1,0} broadcast(rsqrt.24), dimensions={0,1,2}
+  mul.193 = f32[1,8]{1,0} reshape(mul.192)
+  mul.194 = f32[1,8,16]{2,1,0} broadcast(mul.193), dimensions={0,1}
+  Arg_52.1 = f32[16]{0} parameter(52)
+  reshape.72 = f32[1,1,16]{2,1,0} reshape(Arg_52.1)
+  mul.195 = f32[1,1,16]{2,1,0} broadcast(reshape.72), dimensions={0,1,2}
+  mul.196 = f32[1,16]{1,0} reshape(mul.195)
+  mul.197 = f32[1,8,16]{2,1,0} broadcast(mul.196), dimensions={0,2}
+  mul.198 = f32[1,8,16]{2,1,0} multiply(mul.194, mul.197)
+  mul.199 = f32[1,8,16]{2,1,0} multiply(sub.172, mul.198)
+  Arg_51.1 = f32[16]{0} parameter(51)
+  reshape.73 = f32[1,1,16]{2,1,0} reshape(Arg_51.1)
+  add.241 = f32[1,1,16]{2,1,0} broadcast(reshape.73), dimensions={0,1,2}
+  add.242 = f32[1,16]{1,0} reshape(add.241)
+  add.243 = f32[1,8,16]{2,1,0} broadcast(add.242), dimensions={0,2}
+  add.244 = f32[1,8,16]{2,1,0} add(mul.199, add.243)
+  Arg_45.1 = f32[16,16]{1,0} parameter(45)
+  dot_general.84 = f32[1,8,16]{2,1,0} dot(add.244, Arg_45.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_44.1 = f32[16,16]{1,0} parameter(44)
+  dot_general.85 = f32[1,8,16]{2,1,0} dot(add.244, Arg_44.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.87 = f32[1,8,8]{2,1,0} dot(dot_general.84, dot_general.85), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={2}
+  div.110 = f32[1,8,8]{2,1,0} divide(dot_general.87, broadcast.6)
+  reduce_max.60 = f32[1,8]{1,0} reduce(div.110, constant.14), dimensions={2}, to_apply=region_26.28
+  max.41 = f32[1,8]{1,0} maximum(reduce_max.60, broadcast.5)
+  broadcast_in_dim.74 = f32[1,8,1]{2,1,0} reshape(max.41)
+  sub.173 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.74), dimensions={0,1,2}
+  sub.174 = f32[1,8]{1,0} reshape(sub.173)
+  sub.175 = f32[1,8,8]{2,1,0} broadcast(sub.174), dimensions={0,1}
+  sub.176 = f32[1,8,8]{2,1,0} subtract(div.110, sub.175)
+  exp.12 = f32[1,8,8]{2,1,0} exponential(sub.176)
+  reduce_sum.302 = f32[1,8]{1,0} reduce(exp.12, constant.15), dimensions={2}, to_apply=region_27.29
+  broadcast_in_dim.75 = f32[1,8,1]{2,1,0} reshape(reduce_sum.302)
+  div.111 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.75), dimensions={0,1,2}
+  div.112 = f32[1,8]{1,0} reshape(div.111)
+  div.113 = f32[1,8,8]{2,1,0} broadcast(div.112), dimensions={0,1}
+  div.114 = f32[1,8,8]{2,1,0} divide(exp.12, div.113)
+  Arg_46.1 = f32[16,16]{1,0} parameter(46)
+  dot_general.86 = f32[1,8,16]{2,1,0} dot(add.244, Arg_46.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.88 = f32[1,8,16]{2,1,0} dot(div.114, dot_general.86), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={1}
+  add.245 = f32[1,8,16]{2,1,0} add(add.239, dot_general.88)
+  reduce_sum.303 = f32[1,8]{1,0} reduce(add.245, constant.15), dimensions={2}, to_apply=region_28.30
+  div.115 = f32[1,8]{1,0} divide(reduce_sum.303, broadcast.9)
+  broadcast_in_dim.76 = f32[1,8,1]{2,1,0} reshape(div.115)
+  sub.178 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.76), dimensions={0,1,2}
+  sub.179 = f32[1,8]{1,0} reshape(sub.178)
+  sub.180 = f32[1,8,16]{2,1,0} broadcast(sub.179), dimensions={0,1}
+  sub.181 = f32[1,8,16]{2,1,0} subtract(add.245, sub.180)
+  square.50 = f32[1,8,16]{2,1,0} multiply(add.245, add.245)
+  reduce_sum.304 = f32[1,8]{1,0} reduce(square.50, constant.15), dimensions={2}, to_apply=region_29.31
+  div.116 = f32[1,8]{1,0} divide(reduce_sum.304, broadcast.9)
+  square.51 = f32[1,8]{1,0} multiply(div.115, div.115)
+  sub.177 = f32[1,8]{1,0} subtract(div.116, square.51)
+  max.42 = f32[1,8]{1,0} maximum(sub.177, broadcast.8)
+  broadcast_in_dim.77 = f32[1,8,1]{2,1,0} reshape(max.42)
+  add.246 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.77, broadcast.7)
+  rsqrt.25 = f32[1,8,1]{2,1,0} rsqrt(add.246)
+  mul.200 = f32[1,8,1]{2,1,0} broadcast(rsqrt.25), dimensions={0,1,2}
+  mul.201 = f32[1,8]{1,0} reshape(mul.200)
+  mul.202 = f32[1,8,16]{2,1,0} broadcast(mul.201), dimensions={0,1}
+  Arg_54.1 = f32[16]{0} parameter(54)
+  reshape.74 = f32[1,1,16]{2,1,0} reshape(Arg_54.1)
+  mul.203 = f32[1,1,16]{2,1,0} broadcast(reshape.74), dimensions={0,1,2}
+  mul.204 = f32[1,16]{1,0} reshape(mul.203)
+  mul.205 = f32[1,8,16]{2,1,0} broadcast(mul.204), dimensions={0,2}
+  mul.206 = f32[1,8,16]{2,1,0} multiply(mul.202, mul.205)
+  mul.207 = f32[1,8,16]{2,1,0} multiply(sub.181, mul.206)
+  Arg_53.1 = f32[16]{0} parameter(53)
+  reshape.75 = f32[1,1,16]{2,1,0} reshape(Arg_53.1)
+  add.247 = f32[1,1,16]{2,1,0} broadcast(reshape.75), dimensions={0,1,2}
+  add.248 = f32[1,16]{1,0} reshape(add.247)
+  add.249 = f32[1,8,16]{2,1,0} broadcast(add.248), dimensions={0,2}
+  add.250 = f32[1,8,16]{2,1,0} add(mul.207, add.249)
+  Arg_48.1 = f32[16,32]{1,0} parameter(48)
+  dot_general.89 = f32[1,8,32]{2,1,0} dot(add.250, Arg_48.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_47.1 = f32[32]{0} parameter(47)
+  reshape.76 = f32[1,1,32]{2,1,0} reshape(Arg_47.1)
+  add.251 = f32[1,1,32]{2,1,0} broadcast(reshape.76), dimensions={0,1,2}
+  add.252 = f32[1,32]{1,0} reshape(add.251)
+  add.253 = f32[1,8,32]{2,1,0} broadcast(add.252), dimensions={0,2}
+  add.254 = f32[1,8,32]{2,1,0} add(dot_general.89, add.253)
+  jit_relu_.12 = f32[1,8,32]{2,1,0} call(add.254), to_apply=relu.7
+  Arg_50.1 = f32[32,16]{1,0} parameter(50)
+  dot_general.90 = f32[1,8,16]{2,1,0} dot(jit_relu_.12, Arg_50.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_49.1 = f32[16]{0} parameter(49)
+  reshape.77 = f32[1,1,16]{2,1,0} reshape(Arg_49.1)
+  add.255 = f32[1,1,16]{2,1,0} broadcast(reshape.77), dimensions={0,1,2}
+  add.256 = f32[1,16]{1,0} reshape(add.255)
+  add.257 = f32[1,8,16]{2,1,0} broadcast(add.256), dimensions={0,2}
+  add.258 = f32[1,8,16]{2,1,0} add(dot_general.90, add.257)
+  add.259 = f32[1,8,16]{2,1,0} add(add.245, add.258)
+  reduce_sum.305 = f32[1,8]{1,0} reduce(add.259, constant.15), dimensions={2}, to_apply=region_30.32
+  div.117 = f32[1,8]{1,0} divide(reduce_sum.305, broadcast.9)
+  broadcast_in_dim.78 = f32[1,8,1]{2,1,0} reshape(div.117)
+  sub.183 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.78), dimensions={0,1,2}
+  sub.184 = f32[1,8]{1,0} reshape(sub.183)
+  sub.185 = f32[1,8,16]{2,1,0} broadcast(sub.184), dimensions={0,1}
+  sub.186 = f32[1,8,16]{2,1,0} subtract(add.259, sub.185)
+  square.52 = f32[1,8,16]{2,1,0} multiply(add.259, add.259)
+  reduce_sum.306 = f32[1,8]{1,0} reduce(square.52, constant.15), dimensions={2}, to_apply=region_31.33
+  div.118 = f32[1,8]{1,0} divide(reduce_sum.306, broadcast.9)
+  square.53 = f32[1,8]{1,0} multiply(div.117, div.117)
+  sub.182 = f32[1,8]{1,0} subtract(div.118, square.53)
+  max.43 = f32[1,8]{1,0} maximum(sub.182, broadcast.8)
+  broadcast_in_dim.79 = f32[1,8,1]{2,1,0} reshape(max.43)
+  add.260 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.79, broadcast.7)
+  rsqrt.26 = f32[1,8,1]{2,1,0} rsqrt(add.260)
+  mul.208 = f32[1,8,1]{2,1,0} broadcast(rsqrt.26), dimensions={0,1,2}
+  mul.209 = f32[1,8]{1,0} reshape(mul.208)
+  mul.210 = f32[1,8,16]{2,1,0} broadcast(mul.209), dimensions={0,1}
+  Arg_63.1 = f32[16]{0} parameter(63)
+  reshape.78 = f32[1,1,16]{2,1,0} reshape(Arg_63.1)
+  mul.211 = f32[1,1,16]{2,1,0} broadcast(reshape.78), dimensions={0,1,2}
+  mul.212 = f32[1,16]{1,0} reshape(mul.211)
+  mul.213 = f32[1,8,16]{2,1,0} broadcast(mul.212), dimensions={0,2}
+  mul.214 = f32[1,8,16]{2,1,0} multiply(mul.210, mul.213)
+  mul.215 = f32[1,8,16]{2,1,0} multiply(sub.186, mul.214)
+  Arg_62.1 = f32[16]{0} parameter(62)
+  reshape.79 = f32[1,1,16]{2,1,0} reshape(Arg_62.1)
+  add.261 = f32[1,1,16]{2,1,0} broadcast(reshape.79), dimensions={0,1,2}
+  add.262 = f32[1,16]{1,0} reshape(add.261)
+  add.263 = f32[1,8,16]{2,1,0} broadcast(add.262), dimensions={0,2}
+  add.264 = f32[1,8,16]{2,1,0} add(mul.215, add.263)
+  Arg_56.1 = f32[16,16]{1,0} parameter(56)
+  dot_general.91 = f32[1,8,16]{2,1,0} dot(add.264, Arg_56.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_55.1 = f32[16,16]{1,0} parameter(55)
+  dot_general.92 = f32[1,8,16]{2,1,0} dot(add.264, Arg_55.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.94 = f32[1,8,8]{2,1,0} dot(dot_general.91, dot_general.92), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={2}
+  div.119 = f32[1,8,8]{2,1,0} divide(dot_general.94, broadcast.6)
+  reduce_max.61 = f32[1,8]{1,0} reduce(div.119, constant.14), dimensions={2}, to_apply=region_32.34
+  max.44 = f32[1,8]{1,0} maximum(reduce_max.61, broadcast.5)
+  broadcast_in_dim.80 = f32[1,8,1]{2,1,0} reshape(max.44)
+  sub.187 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.80), dimensions={0,1,2}
+  sub.188 = f32[1,8]{1,0} reshape(sub.187)
+  sub.189 = f32[1,8,8]{2,1,0} broadcast(sub.188), dimensions={0,1}
+  sub.190 = f32[1,8,8]{2,1,0} subtract(div.119, sub.189)
+  exp.13 = f32[1,8,8]{2,1,0} exponential(sub.190)
+  reduce_sum.307 = f32[1,8]{1,0} reduce(exp.13, constant.15), dimensions={2}, to_apply=region_33.35
+  broadcast_in_dim.81 = f32[1,8,1]{2,1,0} reshape(reduce_sum.307)
+  div.120 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.81), dimensions={0,1,2}
+  div.121 = f32[1,8]{1,0} reshape(div.120)
+  div.122 = f32[1,8,8]{2,1,0} broadcast(div.121), dimensions={0,1}
+  div.123 = f32[1,8,8]{2,1,0} divide(exp.13, div.122)
+  Arg_57.1 = f32[16,16]{1,0} parameter(57)
+  dot_general.93 = f32[1,8,16]{2,1,0} dot(add.264, Arg_57.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.95 = f32[1,8,16]{2,1,0} dot(div.123, dot_general.93), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={1}
+  add.265 = f32[1,8,16]{2,1,0} add(add.259, dot_general.95)
+  reduce_sum.308 = f32[1,8]{1,0} reduce(add.265, constant.15), dimensions={2}, to_apply=region_34.36
+  div.124 = f32[1,8]{1,0} divide(reduce_sum.308, broadcast.9)
+  broadcast_in_dim.82 = f32[1,8,1]{2,1,0} reshape(div.124)
+  sub.192 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.82), dimensions={0,1,2}
+  sub.193 = f32[1,8]{1,0} reshape(sub.192)
+  sub.194 = f32[1,8,16]{2,1,0} broadcast(sub.193), dimensions={0,1}
+  sub.195 = f32[1,8,16]{2,1,0} subtract(add.265, sub.194)
+  square.54 = f32[1,8,16]{2,1,0} multiply(add.265, add.265)
+  reduce_sum.309 = f32[1,8]{1,0} reduce(square.54, constant.15), dimensions={2}, to_apply=region_35.37
+  div.125 = f32[1,8]{1,0} divide(reduce_sum.309, broadcast.9)
+  square.55 = f32[1,8]{1,0} multiply(div.124, div.124)
+  sub.191 = f32[1,8]{1,0} subtract(div.125, square.55)
+  max.45 = f32[1,8]{1,0} maximum(sub.191, broadcast.8)
+  broadcast_in_dim.83 = f32[1,8,1]{2,1,0} reshape(max.45)
+  add.266 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.83, broadcast.7)
+  rsqrt.27 = f32[1,8,1]{2,1,0} rsqrt(add.266)
+  mul.216 = f32[1,8,1]{2,1,0} broadcast(rsqrt.27), dimensions={0,1,2}
+  mul.217 = f32[1,8]{1,0} reshape(mul.216)
+  mul.218 = f32[1,8,16]{2,1,0} broadcast(mul.217), dimensions={0,1}
+  Arg_65.1 = f32[16]{0} parameter(65)
+  reshape.80 = f32[1,1,16]{2,1,0} reshape(Arg_65.1)
+  mul.219 = f32[1,1,16]{2,1,0} broadcast(reshape.80), dimensions={0,1,2}
+  mul.220 = f32[1,16]{1,0} reshape(mul.219)
+  mul.221 = f32[1,8,16]{2,1,0} broadcast(mul.220), dimensions={0,2}
+  mul.222 = f32[1,8,16]{2,1,0} multiply(mul.218, mul.221)
+  mul.223 = f32[1,8,16]{2,1,0} multiply(sub.195, mul.222)
+  Arg_64.1 = f32[16]{0} parameter(64)
+  reshape.81 = f32[1,1,16]{2,1,0} reshape(Arg_64.1)
+  add.267 = f32[1,1,16]{2,1,0} broadcast(reshape.81), dimensions={0,1,2}
+  add.268 = f32[1,16]{1,0} reshape(add.267)
+  add.269 = f32[1,8,16]{2,1,0} broadcast(add.268), dimensions={0,2}
+  add.270 = f32[1,8,16]{2,1,0} add(mul.223, add.269)
+  Arg_59.1 = f32[16,32]{1,0} parameter(59)
+  dot_general.96 = f32[1,8,32]{2,1,0} dot(add.270, Arg_59.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_58.1 = f32[32]{0} parameter(58)
+  reshape.82 = f32[1,1,32]{2,1,0} reshape(Arg_58.1)
+  add.271 = f32[1,1,32]{2,1,0} broadcast(reshape.82), dimensions={0,1,2}
+  add.272 = f32[1,32]{1,0} reshape(add.271)
+  add.273 = f32[1,8,32]{2,1,0} broadcast(add.272), dimensions={0,2}
+  add.274 = f32[1,8,32]{2,1,0} add(dot_general.96, add.273)
+  jit_relu_.13 = f32[1,8,32]{2,1,0} call(add.274), to_apply=relu.7
+  Arg_61.1 = f32[32,16]{1,0} parameter(61)
+  dot_general.97 = f32[1,8,16]{2,1,0} dot(jit_relu_.13, Arg_61.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_60.1 = f32[16]{0} parameter(60)
+  reshape.83 = f32[1,1,16]{2,1,0} reshape(Arg_60.1)
+  add.275 = f32[1,1,16]{2,1,0} broadcast(reshape.83), dimensions={0,1,2}
+  add.276 = f32[1,16]{1,0} reshape(add.275)
+  add.277 = f32[1,8,16]{2,1,0} broadcast(add.276), dimensions={0,2}
+  add.278 = f32[1,8,16]{2,1,0} add(dot_general.97, add.277)
+  add.279 = f32[1,8,16]{2,1,0} add(add.265, add.278)
+  reduce_sum.310 = f32[1,8]{1,0} reduce(add.279, constant.15), dimensions={2}, to_apply=region_36.38
+  div.126 = f32[1,8]{1,0} divide(reduce_sum.310, broadcast.9)
+  broadcast_in_dim.84 = f32[1,8,1]{2,1,0} reshape(div.126)
+  sub.197 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.84), dimensions={0,1,2}
+  sub.198 = f32[1,8]{1,0} reshape(sub.197)
+  sub.199 = f32[1,8,16]{2,1,0} broadcast(sub.198), dimensions={0,1}
+  sub.200 = f32[1,8,16]{2,1,0} subtract(add.279, sub.199)
+  square.56 = f32[1,8,16]{2,1,0} multiply(add.279, add.279)
+  reduce_sum.311 = f32[1,8]{1,0} reduce(square.56, constant.15), dimensions={2}, to_apply=region_37.39
+  div.127 = f32[1,8]{1,0} divide(reduce_sum.311, broadcast.9)
+  square.57 = f32[1,8]{1,0} multiply(div.126, div.126)
+  sub.196 = f32[1,8]{1,0} subtract(div.127, square.57)
+  max.46 = f32[1,8]{1,0} maximum(sub.196, broadcast.8)
+  broadcast_in_dim.85 = f32[1,8,1]{2,1,0} reshape(max.46)
+  add.280 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.85, broadcast.7)
+  rsqrt.28 = f32[1,8,1]{2,1,0} rsqrt(add.280)
+  mul.224 = f32[1,8,1]{2,1,0} broadcast(rsqrt.28), dimensions={0,1,2}
+  mul.225 = f32[1,8]{1,0} reshape(mul.224)
+  mul.226 = f32[1,8,16]{2,1,0} broadcast(mul.225), dimensions={0,1}
+  Arg_74.1 = f32[16]{0} parameter(74)
+  reshape.84 = f32[1,1,16]{2,1,0} reshape(Arg_74.1)
+  mul.227 = f32[1,1,16]{2,1,0} broadcast(reshape.84), dimensions={0,1,2}
+  mul.228 = f32[1,16]{1,0} reshape(mul.227)
+  mul.229 = f32[1,8,16]{2,1,0} broadcast(mul.228), dimensions={0,2}
+  mul.230 = f32[1,8,16]{2,1,0} multiply(mul.226, mul.229)
+  mul.231 = f32[1,8,16]{2,1,0} multiply(sub.200, mul.230)
+  Arg_73.1 = f32[16]{0} parameter(73)
+  reshape.85 = f32[1,1,16]{2,1,0} reshape(Arg_73.1)
+  add.281 = f32[1,1,16]{2,1,0} broadcast(reshape.85), dimensions={0,1,2}
+  add.282 = f32[1,16]{1,0} reshape(add.281)
+  add.283 = f32[1,8,16]{2,1,0} broadcast(add.282), dimensions={0,2}
+  add.284 = f32[1,8,16]{2,1,0} add(mul.231, add.283)
+  Arg_67.1 = f32[16,16]{1,0} parameter(67)
+  dot_general.98 = f32[1,8,16]{2,1,0} dot(add.284, Arg_67.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_66.1 = f32[16,16]{1,0} parameter(66)
+  dot_general.99 = f32[1,8,16]{2,1,0} dot(add.284, Arg_66.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.101 = f32[1,8,8]{2,1,0} dot(dot_general.98, dot_general.99), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={2}
+  div.128 = f32[1,8,8]{2,1,0} divide(dot_general.101, broadcast.6)
+  reduce_max.62 = f32[1,8]{1,0} reduce(div.128, constant.14), dimensions={2}, to_apply=region_38.40
+  max.47 = f32[1,8]{1,0} maximum(reduce_max.62, broadcast.5)
+  broadcast_in_dim.86 = f32[1,8,1]{2,1,0} reshape(max.47)
+  sub.201 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.86), dimensions={0,1,2}
+  sub.202 = f32[1,8]{1,0} reshape(sub.201)
+  sub.203 = f32[1,8,8]{2,1,0} broadcast(sub.202), dimensions={0,1}
+  sub.204 = f32[1,8,8]{2,1,0} subtract(div.128, sub.203)
+  exp.14 = f32[1,8,8]{2,1,0} exponential(sub.204)
+  reduce_sum.312 = f32[1,8]{1,0} reduce(exp.14, constant.15), dimensions={2}, to_apply=region_39.41
+  broadcast_in_dim.87 = f32[1,8,1]{2,1,0} reshape(reduce_sum.312)
+  div.129 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.87), dimensions={0,1,2}
+  div.130 = f32[1,8]{1,0} reshape(div.129)
+  div.131 = f32[1,8,8]{2,1,0} broadcast(div.130), dimensions={0,1}
+  div.132 = f32[1,8,8]{2,1,0} divide(exp.14, div.131)
+  Arg_68.1 = f32[16,16]{1,0} parameter(68)
+  dot_general.100 = f32[1,8,16]{2,1,0} dot(add.284, Arg_68.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.102 = f32[1,8,16]{2,1,0} dot(div.132, dot_general.100), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={1}
+  add.285 = f32[1,8,16]{2,1,0} add(add.279, dot_general.102)
+  reduce_sum.313 = f32[1,8]{1,0} reduce(add.285, constant.15), dimensions={2}, to_apply=region_40.42
+  div.133 = f32[1,8]{1,0} divide(reduce_sum.313, broadcast.9)
+  broadcast_in_dim.88 = f32[1,8,1]{2,1,0} reshape(div.133)
+  sub.206 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.88), dimensions={0,1,2}
+  sub.207 = f32[1,8]{1,0} reshape(sub.206)
+  sub.208 = f32[1,8,16]{2,1,0} broadcast(sub.207), dimensions={0,1}
+  sub.209 = f32[1,8,16]{2,1,0} subtract(add.285, sub.208)
+  square.58 = f32[1,8,16]{2,1,0} multiply(add.285, add.285)
+  reduce_sum.314 = f32[1,8]{1,0} reduce(square.58, constant.15), dimensions={2}, to_apply=region_41.43
+  div.134 = f32[1,8]{1,0} divide(reduce_sum.314, broadcast.9)
+  square.59 = f32[1,8]{1,0} multiply(div.133, div.133)
+  sub.205 = f32[1,8]{1,0} subtract(div.134, square.59)
+  max.48 = f32[1,8]{1,0} maximum(sub.205, broadcast.8)
+  broadcast_in_dim.89 = f32[1,8,1]{2,1,0} reshape(max.48)
+  add.286 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.89, broadcast.7)
+  rsqrt.29 = f32[1,8,1]{2,1,0} rsqrt(add.286)
+  mul.232 = f32[1,8,1]{2,1,0} broadcast(rsqrt.29), dimensions={0,1,2}
+  mul.233 = f32[1,8]{1,0} reshape(mul.232)
+  mul.234 = f32[1,8,16]{2,1,0} broadcast(mul.233), dimensions={0,1}
+  Arg_76.1 = f32[16]{0} parameter(76)
+  reshape.86 = f32[1,1,16]{2,1,0} reshape(Arg_76.1)
+  mul.235 = f32[1,1,16]{2,1,0} broadcast(reshape.86), dimensions={0,1,2}
+  mul.236 = f32[1,16]{1,0} reshape(mul.235)
+  mul.237 = f32[1,8,16]{2,1,0} broadcast(mul.236), dimensions={0,2}
+  mul.238 = f32[1,8,16]{2,1,0} multiply(mul.234, mul.237)
+  mul.239 = f32[1,8,16]{2,1,0} multiply(sub.209, mul.238)
+  Arg_75.1 = f32[16]{0} parameter(75)
+  reshape.87 = f32[1,1,16]{2,1,0} reshape(Arg_75.1)
+  add.287 = f32[1,1,16]{2,1,0} broadcast(reshape.87), dimensions={0,1,2}
+  add.288 = f32[1,16]{1,0} reshape(add.287)
+  add.289 = f32[1,8,16]{2,1,0} broadcast(add.288), dimensions={0,2}
+  add.290 = f32[1,8,16]{2,1,0} add(mul.239, add.289)
+  Arg_70.1 = f32[16,32]{1,0} parameter(70)
+  dot_general.103 = f32[1,8,32]{2,1,0} dot(add.290, Arg_70.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_69.1 = f32[32]{0} parameter(69)
+  reshape.88 = f32[1,1,32]{2,1,0} reshape(Arg_69.1)
+  add.291 = f32[1,1,32]{2,1,0} broadcast(reshape.88), dimensions={0,1,2}
+  add.292 = f32[1,32]{1,0} reshape(add.291)
+  add.293 = f32[1,8,32]{2,1,0} broadcast(add.292), dimensions={0,2}
+  add.294 = f32[1,8,32]{2,1,0} add(dot_general.103, add.293)
+  jit_relu_.14 = f32[1,8,32]{2,1,0} call(add.294), to_apply=relu.7
+  Arg_72.1 = f32[32,16]{1,0} parameter(72)
+  dot_general.104 = f32[1,8,16]{2,1,0} dot(jit_relu_.14, Arg_72.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_71.1 = f32[16]{0} parameter(71)
+  reshape.89 = f32[1,1,16]{2,1,0} reshape(Arg_71.1)
+  add.295 = f32[1,1,16]{2,1,0} broadcast(reshape.89), dimensions={0,1,2}
+  add.296 = f32[1,16]{1,0} reshape(add.295)
+  add.297 = f32[1,8,16]{2,1,0} broadcast(add.296), dimensions={0,2}
+  add.298 = f32[1,8,16]{2,1,0} add(dot_general.104, add.297)
+  add.299 = f32[1,8,16]{2,1,0} add(add.285, add.298)
+  reduce_sum.315 = f32[1,8]{1,0} reduce(add.299, constant.15), dimensions={2}, to_apply=region_42.44
+  div.135 = f32[1,8]{1,0} divide(reduce_sum.315, broadcast.9)
+  broadcast_in_dim.90 = f32[1,8,1]{2,1,0} reshape(div.135)
+  sub.211 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.90), dimensions={0,1,2}
+  sub.212 = f32[1,8]{1,0} reshape(sub.211)
+  sub.213 = f32[1,8,16]{2,1,0} broadcast(sub.212), dimensions={0,1}
+  sub.214 = f32[1,8,16]{2,1,0} subtract(add.299, sub.213)
+  square.60 = f32[1,8,16]{2,1,0} multiply(add.299, add.299)
+  reduce_sum.316 = f32[1,8]{1,0} reduce(square.60, constant.15), dimensions={2}, to_apply=region_43.45
+  div.136 = f32[1,8]{1,0} divide(reduce_sum.316, broadcast.9)
+  square.61 = f32[1,8]{1,0} multiply(div.135, div.135)
+  sub.210 = f32[1,8]{1,0} subtract(div.136, square.61)
+  max.49 = f32[1,8]{1,0} maximum(sub.210, broadcast.8)
+  broadcast_in_dim.91 = f32[1,8,1]{2,1,0} reshape(max.49)
+  add.300 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.91, broadcast.7)
+  rsqrt.30 = f32[1,8,1]{2,1,0} rsqrt(add.300)
+  mul.240 = f32[1,8,1]{2,1,0} broadcast(rsqrt.30), dimensions={0,1,2}
+  mul.241 = f32[1,8]{1,0} reshape(mul.240)
+  mul.242 = f32[1,8,16]{2,1,0} broadcast(mul.241), dimensions={0,1}
+  Arg_85.1 = f32[16]{0} parameter(85)
+  reshape.90 = f32[1,1,16]{2,1,0} reshape(Arg_85.1)
+  mul.243 = f32[1,1,16]{2,1,0} broadcast(reshape.90), dimensions={0,1,2}
+  mul.244 = f32[1,16]{1,0} reshape(mul.243)
+  mul.245 = f32[1,8,16]{2,1,0} broadcast(mul.244), dimensions={0,2}
+  mul.246 = f32[1,8,16]{2,1,0} multiply(mul.242, mul.245)
+  mul.247 = f32[1,8,16]{2,1,0} multiply(sub.214, mul.246)
+  Arg_84.1 = f32[16]{0} parameter(84)
+  reshape.91 = f32[1,1,16]{2,1,0} reshape(Arg_84.1)
+  add.301 = f32[1,1,16]{2,1,0} broadcast(reshape.91), dimensions={0,1,2}
+  add.302 = f32[1,16]{1,0} reshape(add.301)
+  add.303 = f32[1,8,16]{2,1,0} broadcast(add.302), dimensions={0,2}
+  add.304 = f32[1,8,16]{2,1,0} add(mul.247, add.303)
+  Arg_78.1 = f32[16,16]{1,0} parameter(78)
+  dot_general.105 = f32[1,8,16]{2,1,0} dot(add.304, Arg_78.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_77.1 = f32[16,16]{1,0} parameter(77)
+  dot_general.106 = f32[1,8,16]{2,1,0} dot(add.304, Arg_77.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.108 = f32[1,8,8]{2,1,0} dot(dot_general.105, dot_general.106), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={2}
+  div.137 = f32[1,8,8]{2,1,0} divide(dot_general.108, broadcast.6)
+  reduce_max.63 = f32[1,8]{1,0} reduce(div.137, constant.14), dimensions={2}, to_apply=region_44.46
+  max.50 = f32[1,8]{1,0} maximum(reduce_max.63, broadcast.5)
+  broadcast_in_dim.92 = f32[1,8,1]{2,1,0} reshape(max.50)
+  sub.215 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.92), dimensions={0,1,2}
+  sub.216 = f32[1,8]{1,0} reshape(sub.215)
+  sub.217 = f32[1,8,8]{2,1,0} broadcast(sub.216), dimensions={0,1}
+  sub.218 = f32[1,8,8]{2,1,0} subtract(div.137, sub.217)
+  exp.15 = f32[1,8,8]{2,1,0} exponential(sub.218)
+  reduce_sum.317 = f32[1,8]{1,0} reduce(exp.15, constant.15), dimensions={2}, to_apply=region_45.47
+  broadcast_in_dim.93 = f32[1,8,1]{2,1,0} reshape(reduce_sum.317)
+  div.138 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.93), dimensions={0,1,2}
+  div.139 = f32[1,8]{1,0} reshape(div.138)
+  div.140 = f32[1,8,8]{2,1,0} broadcast(div.139), dimensions={0,1}
+  div.141 = f32[1,8,8]{2,1,0} divide(exp.15, div.140)
+  Arg_79.1 = f32[16,16]{1,0} parameter(79)
+  dot_general.107 = f32[1,8,16]{2,1,0} dot(add.304, Arg_79.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  dot_general.109 = f32[1,8,16]{2,1,0} dot(div.141, dot_general.107), lhs_batch_dims={0}, lhs_contracting_dims={2}, rhs_batch_dims={0}, rhs_contracting_dims={1}
+  add.305 = f32[1,8,16]{2,1,0} add(add.299, dot_general.109)
+  reduce_sum.318 = f32[1,8]{1,0} reduce(add.305, constant.15), dimensions={2}, to_apply=region_46.48
+  div.142 = f32[1,8]{1,0} divide(reduce_sum.318, broadcast.9)
+  broadcast_in_dim.94 = f32[1,8,1]{2,1,0} reshape(div.142)
+  sub.220 = f32[1,8,1]{2,1,0} broadcast(broadcast_in_dim.94), dimensions={0,1,2}
+  sub.221 = f32[1,8]{1,0} reshape(sub.220)
+  sub.222 = f32[1,8,16]{2,1,0} broadcast(sub.221), dimensions={0,1}
+  sub.223 = f32[1,8,16]{2,1,0} subtract(add.305, sub.222)
+  square.62 = f32[1,8,16]{2,1,0} multiply(add.305, add.305)
+  reduce_sum.319 = f32[1,8]{1,0} reduce(square.62, constant.15), dimensions={2}, to_apply=region_47.49
+  div.143 = f32[1,8]{1,0} divide(reduce_sum.319, broadcast.9)
+  square.63 = f32[1,8]{1,0} multiply(div.142, div.142)
+  sub.219 = f32[1,8]{1,0} subtract(div.143, square.63)
+  max.51 = f32[1,8]{1,0} maximum(sub.219, broadcast.8)
+  broadcast_in_dim.95 = f32[1,8,1]{2,1,0} reshape(max.51)
+  add.306 = f32[1,8,1]{2,1,0} add(broadcast_in_dim.95, broadcast.7)
+  rsqrt.31 = f32[1,8,1]{2,1,0} rsqrt(add.306)
+  mul.248 = f32[1,8,1]{2,1,0} broadcast(rsqrt.31), dimensions={0,1,2}
+  mul.249 = f32[1,8]{1,0} reshape(mul.248)
+  mul.250 = f32[1,8,16]{2,1,0} broadcast(mul.249), dimensions={0,1}
+  Arg_87.1 = f32[16]{0} parameter(87)
+  reshape.92 = f32[1,1,16]{2,1,0} reshape(Arg_87.1)
+  mul.251 = f32[1,1,16]{2,1,0} broadcast(reshape.92), dimensions={0,1,2}
+  mul.252 = f32[1,16]{1,0} reshape(mul.251)
+  mul.253 = f32[1,8,16]{2,1,0} broadcast(mul.252), dimensions={0,2}
+  mul.254 = f32[1,8,16]{2,1,0} multiply(mul.250, mul.253)
+  mul.255 = f32[1,8,16]{2,1,0} multiply(sub.223, mul.254)
+  Arg_86.1 = f32[16]{0} parameter(86)
+  reshape.93 = f32[1,1,16]{2,1,0} reshape(Arg_86.1)
+  add.307 = f32[1,1,16]{2,1,0} broadcast(reshape.93), dimensions={0,1,2}
+  add.308 = f32[1,16]{1,0} reshape(add.307)
+  add.309 = f32[1,8,16]{2,1,0} broadcast(add.308), dimensions={0,2}
+  add.310 = f32[1,8,16]{2,1,0} add(mul.255, add.309)
+  Arg_81.1 = f32[16,32]{1,0} parameter(81)
+  dot_general.110 = f32[1,8,32]{2,1,0} dot(add.310, Arg_81.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_80.1 = f32[32]{0} parameter(80)
+  reshape.94 = f32[1,1,32]{2,1,0} reshape(Arg_80.1)
+  add.311 = f32[1,1,32]{2,1,0} broadcast(reshape.94), dimensions={0,1,2}
+  add.312 = f32[1,32]{1,0} reshape(add.311)
+  add.313 = f32[1,8,32]{2,1,0} broadcast(add.312), dimensions={0,2}
+  add.314 = f32[1,8,32]{2,1,0} add(dot_general.110, add.313)
+  jit_relu_.15 = f32[1,8,32]{2,1,0} call(add.314), to_apply=relu.7
+  Arg_83.1 = f32[32,16]{1,0} parameter(83)
+  dot_general.111 = f32[1,8,16]{2,1,0} dot(jit_relu_.15, Arg_83.1), lhs_contracting_dims={2}, rhs_contracting_dims={0}
+  Arg_82.1 = f32[16]{0} parameter(82)
+  reshape.95 = f32[1,1,16]{2,1,0} reshape(Arg_82.1)
+  add.315 = f32[1,1,16]{2,1,0} broadcast(reshape.95), dimensions={0,1,2}
+  add.316 = f32[1,16]{1,0} reshape(add.315)
+  add.317 = f32[1,8,16]{2,1,0} broadcast(add.316), dimensions={0,2}
+  add.318 = f32[1,8,16]{2,1,0} add(dot_general.111, add.317)
+  ROOT add.319 = f32[1,8,16]{2,1,0} add(add.305, add.318)
+}
+
+ENTRY main.51 {
+  p__params____TransformerEncoderLayer_0____AttentionBlock_0____k____kernel__.1 = f32[16,16]{1,0} parameter(0)
+  p__params____TransformerEncoderLayer_0____AttentionBlock_0____q____kernel__.1 = f32[16,16]{1,0} parameter(1)
+  p__params____TransformerEncoderLayer_0____AttentionBlock_0____v____kernel__.1 = f32[16,16]{1,0} parameter(2)
+  p__params____TransformerEncoderLayer_0____Dense_0____bias__.1 = f32[32]{0} parameter(3)
+  p__params____TransformerEncoderLayer_0____Dense_0____kernel__.1 = f32[16,32]{1,0} parameter(4)
+  p__params____TransformerEncoderLayer_0____Dense_1____bias__.1 = f32[16]{0} parameter(5)
+  p__params____TransformerEncoderLayer_0____Dense_1____kernel__.1 = f32[32,16]{1,0} parameter(6)
+  p__params____TransformerEncoderLayer_0____LayerNorm_0____bias__.1 = f32[16]{0} parameter(7)
+  p__params____TransformerEncoderLayer_0____LayerNorm_0____scale__.1 = f32[16]{0} parameter(8)
+  p__params____TransformerEncoderLayer_0____LayerNorm_1____bias__.1 = f32[16]{0} parameter(9)
+  p__params____TransformerEncoderLayer_0____LayerNorm_1____scale__.1 = f32[16]{0} parameter(10)
+  p__params____TransformerEncoderLayer_1____AttentionBlock_0____k____kernel__.1 = f32[16,16]{1,0} parameter(11)
+  p__params____TransformerEncoderLayer_1____AttentionBlock_0____q____kernel__.1 = f32[16,16]{1,0} parameter(12)
+  p__params____TransformerEncoderLayer_1____AttentionBlock_0____v____kernel__.1 = f32[16,16]{1,0} parameter(13)
+  p__params____TransformerEncoderLayer_1____Dense_0____bias__.1 = f32[32]{0} parameter(14)
+  p__params____TransformerEncoderLayer_1____Dense_0____kernel__.1 = f32[16,32]{1,0} parameter(15)
+  p__params____TransformerEncoderLayer_1____Dense_1____bias__.1 = f32[16]{0} parameter(16)
+  p__params____TransformerEncoderLayer_1____Dense_1____kernel__.1 = f32[32,16]{1,0} parameter(17)
+  p__params____TransformerEncoderLayer_1____LayerNorm_0____bias__.1 = f32[16]{0} parameter(18)
+  p__params____TransformerEncoderLayer_1____LayerNorm_0____scale__.1 = f32[16]{0} parameter(19)
+  p__params____TransformerEncoderLayer_1____LayerNorm_1____bias__.1 = f32[16]{0} parameter(20)
+  p__params____TransformerEncoderLayer_1____LayerNorm_1____scale__.1 = f32[16]{0} parameter(21)
+  p__params____TransformerEncoderLayer_2____AttentionBlock_0____k____kernel__.1 = f32[16,16]{1,0} parameter(22)
+  p__params____TransformerEncoderLayer_2____AttentionBlock_0____q____kernel__.1 = f32[16,16]{1,0} parameter(23)
+  p__params____TransformerEncoderLayer_2____AttentionBlock_0____v____kernel__.1 = f32[16,16]{1,0} parameter(24)
+  p__params____TransformerEncoderLayer_2____Dense_0____bias__.1 = f32[32]{0} parameter(25)
+  p__params____TransformerEncoderLayer_2____Dense_0____kernel__.1 = f32[16,32]{1,0} parameter(26)
+  p__params____TransformerEncoderLayer_2____Dense_1____bias__.1 = f32[16]{0} parameter(27)
+  p__params____TransformerEncoderLayer_2____Dense_1____kernel__.1 = f32[32,16]{1,0} parameter(28)
+  p__params____TransformerEncoderLayer_2____LayerNorm_0____bias__.1 = f32[16]{0} parameter(29)
+  p__params____TransformerEncoderLayer_2____LayerNorm_0____scale__.1 = f32[16]{0} parameter(30)
+  p__params____TransformerEncoderLayer_2____LayerNorm_1____bias__.1 = f32[16]{0} parameter(31)
+  p__params____TransformerEncoderLayer_2____LayerNorm_1____scale__.1 = f32[16]{0} parameter(32)
+  p__params____TransformerEncoderLayer_3____AttentionBlock_0____k____kernel__.1 = f32[16,16]{1,0} parameter(33)
+  p__params____TransformerEncoderLayer_3____AttentionBlock_0____q____kernel__.1 = f32[16,16]{1,0} parameter(34)
+  p__params____TransformerEncoderLayer_3____AttentionBlock_0____v____kernel__.1 = f32[16,16]{1,0} parameter(35)
+  p__params____TransformerEncoderLayer_3____Dense_0____bias__.1 = f32[32]{0} parameter(36)
+  p__params____TransformerEncoderLayer_3____Dense_0____kernel__.1 = f32[16,32]{1,0} parameter(37)
+  p__params____TransformerEncoderLayer_3____Dense_1____bias__.1 = f32[16]{0} parameter(38)
+  p__params____TransformerEncoderLayer_3____Dense_1____kernel__.1 = f32[32,16]{1,0} parameter(39)
+  p__params____TransformerEncoderLayer_3____LayerNorm_0____bias__.1 = f32[16]{0} parameter(40)
+  p__params____TransformerEncoderLayer_3____LayerNorm_0____scale__.1 = f32[16]{0} parameter(41)
+  p__params____TransformerEncoderLayer_3____LayerNorm_1____bias__.1 = f32[16]{0} parameter(42)
+  p__params____TransformerEncoderLayer_3____LayerNorm_1____scale__.1 = f32[16]{0} parameter(43)
+  p__params____TransformerEncoderLayer_4____AttentionBlock_0____k____kernel__.1 = f32[16,16]{1,0} parameter(44)
+  p__params____TransformerEncoderLayer_4____AttentionBlock_0____q____kernel__.1 = f32[16,16]{1,0} parameter(45)
+  p__params____TransformerEncoderLayer_4____AttentionBlock_0____v____kernel__.1 = f32[16,16]{1,0} parameter(46)
+  p__params____TransformerEncoderLayer_4____Dense_0____bias__.1 = f32[32]{0} parameter(47)
+  p__params____TransformerEncoderLayer_4____Dense_0____kernel__.1 = f32[16,32]{1,0} parameter(48)
+  p__params____TransformerEncoderLayer_4____Dense_1____bias__.1 = f32[16]{0} parameter(49)
+  p__params____TransformerEncoderLayer_4____Dense_1____kernel__.1 = f32[32,16]{1,0} parameter(50)
+  p__params____TransformerEncoderLayer_4____LayerNorm_0____bias__.1 = f32[16]{0} parameter(51)
+  p__params____TransformerEncoderLayer_4____LayerNorm_0____scale__.1 = f32[16]{0} parameter(52)
+  p__params____TransformerEncoderLayer_4____LayerNorm_1____bias__.1 = f32[16]{0} parameter(53)
+  p__params____TransformerEncoderLayer_4____LayerNorm_1____scale__.1 = f32[16]{0} parameter(54)
+  p__params____TransformerEncoderLayer_5____AttentionBlock_0____k____kernel__.1 = f32[16,16]{1,0} parameter(55)
+  p__params____TransformerEncoderLayer_5____AttentionBlock_0____q____kernel__.1 = f32[16,16]{1,0} parameter(56)
+  p__params____TransformerEncoderLayer_5____AttentionBlock_0____v____kernel__.1 = f32[16,16]{1,0} parameter(57)
+  p__params____TransformerEncoderLayer_5____Dense_0____bias__.1 = f32[32]{0} parameter(58)
+  p__params____TransformerEncoderLayer_5____Dense_0____kernel__.1 = f32[16,32]{1,0} parameter(59)
+  p__params____TransformerEncoderLayer_5____Dense_1____bias__.1 = f32[16]{0} parameter(60)
+  p__params____TransformerEncoderLayer_5____Dense_1____kernel__.1 = f32[32,16]{1,0} parameter(61)
+  p__params____TransformerEncoderLayer_5____LayerNorm_0____bias__.1 = f32[16]{0} parameter(62)
+  p__params____TransformerEncoderLayer_5____LayerNorm_0____scale__.1 = f32[16]{0} parameter(63)
+  p__params____TransformerEncoderLayer_5____LayerNorm_1____bias__.1 = f32[16]{0} parameter(64)
+  p__params____TransformerEncoderLayer_5____LayerNorm_1____scale__.1 = f32[16]{0} parameter(65)
+  p__params____TransformerEncoderLayer_6____AttentionBlock_0____k____kernel__.1 = f32[16,16]{1,0} parameter(66)
+  p__params____TransformerEncoderLayer_6____AttentionBlock_0____q____kernel__.1 = f32[16,16]{1,0} parameter(67)
+  p__params____TransformerEncoderLayer_6____AttentionBlock_0____v____kernel__.1 = f32[16,16]{1,0} parameter(68)
+  p__params____TransformerEncoderLayer_6____Dense_0____bias__.1 = f32[32]{0} parameter(69)
+  p__params____TransformerEncoderLayer_6____Dense_0____kernel__.1 = f32[16,32]{1,0} parameter(70)
+  p__params____TransformerEncoderLayer_6____Dense_1____bias__.1 = f32[16]{0} parameter(71)
+  p__params____TransformerEncoderLayer_6____Dense_1____kernel__.1 = f32[32,16]{1,0} parameter(72)
+  p__params____TransformerEncoderLayer_6____LayerNorm_0____bias__.1 = f32[16]{0} parameter(73)
+  p__params____TransformerEncoderLayer_6____LayerNorm_0____scale__.1 = f32[16]{0} parameter(74)
+  p__params____TransformerEncoderLayer_6____LayerNorm_1____bias__.1 = f32[16]{0} parameter(75)
+  p__params____TransformerEncoderLayer_6____LayerNorm_1____scale__.1 = f32[16]{0} parameter(76)
+  p__params____TransformerEncoderLayer_7____AttentionBlock_0____k____kernel__.1 = f32[16,16]{1,0} parameter(77)
+  p__params____TransformerEncoderLayer_7____AttentionBlock_0____q____kernel__.1 = f32[16,16]{1,0} parameter(78)
+  p__params____TransformerEncoderLayer_7____AttentionBlock_0____v____kernel__.1 = f32[16,16]{1,0} parameter(79)
+  p__params____TransformerEncoderLayer_7____Dense_0____bias__.1 = f32[32]{0} parameter(80)
+  p__params____TransformerEncoderLayer_7____Dense_0____kernel__.1 = f32[16,32]{1,0} parameter(81)
+  p__params____TransformerEncoderLayer_7____Dense_1____bias__.1 = f32[16]{0} parameter(82)
+  p__params____TransformerEncoderLayer_7____Dense_1____kernel__.1 = f32[32,16]{1,0} parameter(83)
+  p__params____TransformerEncoderLayer_7____LayerNorm_0____bias__.1 = f32[16]{0} parameter(84)
+  p__params____TransformerEncoderLayer_7____LayerNorm_0____scale__.1 = f32[16]{0} parameter(85)
+  p__params____TransformerEncoderLayer_7____LayerNorm_1____bias__.1 = f32[16]{0} parameter(86)
+  p__params____TransformerEncoderLayer_7____LayerNorm_1____scale__.1 = f32[16]{0} parameter(87)
+  x.1 = f32[1,8,16]{2,1,0} parameter(88)
+  ROOT jit__lambda__.1 = f32[1,8,16]{2,1,0} call(p__params____TransformerEncoderLayer_0____AttentionBlock_0____k____kernel__.1, p__params____TransformerEncoderLayer_0____AttentionBlock_0____q____kernel__.1, p__params____TransformerEncoderLayer_0____AttentionBlock_0____v____kernel__.1, p__params____TransformerEncoderLayer_0____Dense_0____bias__.1, p__params____TransformerEncoderLayer_0____Dense_0____kernel__.1, p__params____TransformerEncoderLayer_0____Dense_1____bias__.1, p__params____TransformerEncoderLayer_0____Dense_1____kernel__.1, p__params____TransformerEncoderLayer_0____LayerNorm_0____bias__.1, p__params____TransformerEncoderLayer_0____LayerNorm_0____scale__.1, p__params____TransformerEncoderLayer_0____LayerNorm_1____bias__.1, p__params____TransformerEncoderLayer_0____LayerNorm_1____scale__.1, p__params____TransformerEncoderLayer_1____AttentionBlock_0____k____kernel__.1, p__params____TransformerEncoderLayer_1____AttentionBlock_0____q____kernel__.1, p__params____TransformerEncoderLayer_1____AttentionBlock_0____v____kernel__.1, p__params____TransformerEncoderLayer_1____Dense_0____bias__.1, p__params____TransformerEncoderLayer_1____Dense_0____kernel__.1, p__params____TransformerEncoderLayer_1____Dense_1____bias__.1, p__params____TransformerEncoderLayer_1____Dense_1____kernel__.1, p__params____TransformerEncoderLayer_1____LayerNorm_0____bias__.1, p__params____TransformerEncoderLayer_1____LayerNorm_0____scale__.1, p__params____TransformerEncoderLayer_1____LayerNorm_1____bias__.1, p__params____TransformerEncoderLayer_1____LayerNorm_1____scale__.1, p__params____TransformerEncoderLayer_2____AttentionBlock_0____k____kernel__.1, p__params____TransformerEncoderLayer_2____AttentionBlock_0____q____kernel__.1, p__params____TransformerEncoderLayer_2____AttentionBlock_0____v____kernel__.1, p__params____TransformerEncoderLayer_2____Dense_0____bias__.1, p__params____TransformerEncoderLayer_2____Dense_0____kernel__.1, p__params____TransformerEncoderLayer_2____Dense_1____bias__.1, p__params____TransformerEncoderLayer_2____Dense_1____kernel__.1, p__params____TransformerEncoderLayer_2____LayerNorm_0____bias__.1, p__params____TransformerEncoderLayer_2____LayerNorm_0____scale__.1, p__params____TransformerEncoderLayer_2____LayerNorm_1____bias__.1, p__params____TransformerEncoderLayer_2____LayerNorm_1____scale__.1, p__params____TransformerEncoderLayer_3____AttentionBlock_0____k____kernel__.1, p__params____TransformerEncoderLayer_3____AttentionBlock_0____q____kernel__.1, p__params____TransformerEncoderLayer_3____AttentionBlock_0____v____kernel__.1, p__params____TransformerEncoderLayer_3____Dense_0____bias__.1, p__params____TransformerEncoderLayer_3____Dense_0____kernel__.1, p__params____TransformerEncoderLayer_3____Dense_1____bias__.1, p__params____TransformerEncoderLayer_3____Dense_1____kernel__.1, p__params____TransformerEncoderLayer_3____LayerNorm_0____bias__.1, p__params____TransformerEncoderLayer_3____LayerNorm_0____scale__.1, p__params____TransformerEncoderLayer_3____LayerNorm_1____bias__.1, p__params____TransformerEncoderLayer_3____LayerNorm_1____scale__.1, p__params____TransformerEncoderLayer_4____AttentionBlock_0____k____kernel__.1, p__params____TransformerEncoderLayer_4____AttentionBlock_0____q____kernel__.1, p__params____TransformerEncoderLayer_4____AttentionBlock_0____v____kernel__.1, p__params____TransformerEncoderLayer_4____Dense_0____bias__.1, p__params____TransformerEncoderLayer_4____Dense_0____kernel__.1, p__params____TransformerEncoderLayer_4____Dense_1____bias__.1, p__params____TransformerEncoderLayer_4____Dense_1____kernel__.1, p__params____TransformerEncoderLayer_4____LayerNorm_0____bias__.1, p__params____TransformerEncoderLayer_4____LayerNorm_0____scale__.1, p__params____TransformerEncoderLayer_4____LayerNorm_1____bias__.1, p__params____TransformerEncoderLayer_4____LayerNorm_1____scale__.1, p__params____TransformerEncoderLayer_5____AttentionBlock_0____k____kernel__.1, p__params____TransformerEncoderLayer_5____AttentionBlock_0____q____kernel__.1, p__params____TransformerEncoderLayer_5____AttentionBlock_0____v____kernel__.1, p__params____TransformerEncoderLayer_5____Dense_0____bias__.1, p__params____TransformerEncoderLayer_5____Dense_0____kernel__.1, p__params____TransformerEncoderLayer_5____Dense_1____bias__.1, p__params____TransformerEncoderLayer_5____Dense_1____kernel__.1, p__params____TransformerEncoderLayer_5____LayerNorm_0____bias__.1, p__params____TransformerEncoderLayer_5____LayerNorm_0____scale__.1, p__params____TransformerEncoderLayer_5____LayerNorm_1____bias__.1, p__params____TransformerEncoderLayer_5____LayerNorm_1____scale__.1, p__params____TransformerEncoderLayer_6____AttentionBlock_0____k____kernel__.1, p__params____TransformerEncoderLayer_6____AttentionBlock_0____q____kernel__.1, p__params____TransformerEncoderLayer_6____AttentionBlock_0____v____kernel__.1, p__params____TransformerEncoderLayer_6____Dense_0____bias__.1, p__params____TransformerEncoderLayer_6____Dense_0____kernel__.1, p__params____TransformerEncoderLayer_6____Dense_1____bias__.1, p__params____TransformerEncoderLayer_6____Dense_1____kernel__.1, p__params____TransformerEncoderLayer_6____LayerNorm_0____bias__.1, p__params____TransformerEncoderLayer_6____LayerNorm_0____scale__.1, p__params____TransformerEncoderLayer_6____LayerNorm_1____bias__.1, p__params____TransformerEncoderLayer_6____LayerNorm_1____scale__.1, p__params____TransformerEncoderLayer_7____AttentionBlock_0____k____kernel__.1, p__params____TransformerEncoderLayer_7____AttentionBlock_0____q____kernel__.1, p__params____TransformerEncoderLayer_7____AttentionBlock_0____v____kernel__.1, p__params____TransformerEncoderLayer_7____Dense_0____bias__.1, p__params____TransformerEncoderLayer_7____Dense_0____kernel__.1, p__params____TransformerEncoderLayer_7____Dense_1____bias__.1, p__params____TransformerEncoderLayer_7____Dense_1____kernel__.1, p__params____TransformerEncoderLayer_7____LayerNorm_0____bias__.1, p__params____TransformerEncoderLayer_7____LayerNorm_0____scale__.1, p__params____TransformerEncoderLayer_7____LayerNorm_1____bias__.1, p__params____TransformerEncoderLayer_7____LayerNorm_1____scale__.1, x.1), to_apply=_lambda_.50
+}
+

@@ -1,0 +1,16 @@
+# Per-run artifacts produced by experiments/flow_prune.py
+experiments/_flow_prune_*/
+experiments/*.csv
+
+# Rendered figures (regenerate from *.py)
+experiments/*.png
+experiments/*.html
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.mypy_cache/
+
+# OS
+.DS_Store

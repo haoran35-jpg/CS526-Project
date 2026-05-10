@@ -1,0 +1,39 @@
+HloModule jit__lambda, entry_computation_layout={(f32[32]{0}, f32[8,32]{1,0}, f32[16]{0}, f32[32,16]{1,0}, f32[2,8]{1,0})->f32[2,16]{1,0}}
+
+relu.1 {
+  Arg_0.2 = f32[2,32]{1,0} parameter(0)
+  constant.1 = f32[] constant(0)
+  max.2 = f32[2,32]{1,0} broadcast(constant.1), dimensions={}
+  ROOT max.3 = f32[2,32]{1,0} maximum(Arg_0.2, max.2)
+}
+
+_lambda_.2 {
+  Arg_4.1 = f32[2,8]{1,0} parameter(4)
+  Arg_1.1 = f32[8,32]{1,0} parameter(1)
+  dot_general.2 = f32[2,32]{1,0} dot(Arg_4.1, Arg_1.1), lhs_contracting_dims={1}, rhs_contracting_dims={0}
+  Arg_0.3 = f32[32]{0} parameter(0)
+  reshape.2 = f32[1,32]{1,0} reshape(Arg_0.3)
+  add.8 = f32[1,32]{1,0} broadcast(reshape.2), dimensions={0,1}
+  add.9 = f32[32]{0} reshape(add.8)
+  add.10 = f32[2,32]{1,0} broadcast(add.9), dimensions={1}
+  add.11 = f32[2,32]{1,0} add(dot_general.2, add.10)
+  jit_relu_.1 = f32[2,32]{1,0} call(add.11), to_apply=relu.1
+  Arg_3.1 = f32[32,16]{1,0} parameter(3)
+  dot_general.3 = f32[2,16]{1,0} dot(jit_relu_.1, Arg_3.1), lhs_contracting_dims={1}, rhs_contracting_dims={0}
+  Arg_2.1 = f32[16]{0} parameter(2)
+  reshape.3 = f32[1,16]{1,0} reshape(Arg_2.1)
+  add.12 = f32[1,16]{1,0} broadcast(reshape.3), dimensions={0,1}
+  add.13 = f32[16]{0} reshape(add.12)
+  add.14 = f32[2,16]{1,0} broadcast(add.13), dimensions={1}
+  ROOT add.15 = f32[2,16]{1,0} add(dot_general.3, add.14)
+}
+
+ENTRY main.3 {
+  p__params____Dense_0____bias__.1 = f32[32]{0} parameter(0)
+  p__params____Dense_0____kernel__.1 = f32[8,32]{1,0} parameter(1)
+  p__params____Dense_1____bias__.1 = f32[16]{0} parameter(2)
+  p__params____Dense_1____kernel__.1 = f32[32,16]{1,0} parameter(3)
+  x.1 = f32[2,8]{1,0} parameter(4)
+  ROOT jit__lambda__.1 = f32[2,16]{1,0} call(p__params____Dense_0____bias__.1, p__params____Dense_0____kernel__.1, p__params____Dense_1____bias__.1, p__params____Dense_1____kernel__.1, x.1), to_apply=_lambda_.2
+}
+

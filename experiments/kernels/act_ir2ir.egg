@@ -1,0 +1,111 @@
+;; Egglog rendition of ACT's `TensorOp` + IR2IR rewrites + flow_prune tile rules.
+;;
+;; Source:
+;;   ACT  : ~/Desktop/act/generators/backend/generic/src/ir/egraph.rs    (TensorOp enum)
+;;   ACT  : ~/Desktop/act/generators/backend/generic/src/isel/rewrites/ir2ir_rewrites.txt
+;;   ours : 3 tile alternatives (T = 128 / 64 / 32) on (Dot ?a ?b)
+;;
+;; Note: ACT's rules 2/3/4/5/7 are *universal* `(?x) => ...` introducers
+;;       (insert dummy dot/copy/bitcvt/reshape pairs) that ACT keeps from
+;;       blowing up via Rust-side `precond_N` + a global `PROCESSED` set.
+;;       Egglog has neither, so we keep only the rules that have a non-trivial
+;;       LHS pattern and use a bounded `(run … 1)` schedule instead of
+;;       `(saturate …)` to avoid rule-0 recursing on its own RHS.
+
+;; ============================================================
+;; Datatype: ACT TensorOp ↦ egglog
+;; ============================================================
+(datatype Tensor
+  ;; leaves
+  (Var             String)              ;; Var['name']
+  (DetectedConst   String)              ;; DCC[…]
+  (Constant        String)              ;; constant[value=…]
+  (Eye             String)              ;; eye[ttype=…]
+
+  ;; binary arithmetic
+  (Add             Tensor Tensor)
+  (Divide          Tensor Tensor)
+  (Or              Tensor Tensor)
+  (Xor             Tensor Tensor)
+  (ShiftLeft       Tensor Tensor)
+  (ShiftRightLogical Tensor Tensor)
+  (Dot             Tensor Tensor)
+
+  ;; unary
+  (Bitcvt          Tensor)
+  (Copy            Tensor)
+  (Exp             Tensor)
+
+  ;; shape ops with attribute string (slice range / dtype / dims / etc.)
+  (Broadcast       String Tensor)
+  (Convert         String Tensor)
+  (ReduceSum       String Tensor)
+  (Reshape         String Tensor)
+  (Slice           String Tensor)
+  (Transpose       String Tensor)
+  (Concat          String Tensor Tensor)
+
+  ;; flow_prune additions: tile-aware alternatives  (last i64 = tile rows)
+  (TiledDot        Tensor Tensor i64)
+  (TiledAdd        Tensor Tensor i64))
+
+
+(ruleset act_ir2ir)
+(ruleset tiling)
+
+
+;; ============================================================
+;; ACT IR2IR rewrites (safe subset, in egglog form)
+;; ============================================================
+
+;; Rule 0 — block-dot split: (add (dot a b) d) ⇒ concat-of-halves.
+;;   ACT hard-codes the split point at i/2 via metadata_0 + precond_0.
+;;   Here we hard-code the split at "0:32" / "32:64" so the demo matmul
+;;   (shape [64,16]) gets cleanly split. For other shapes you would
+;;   register additional copies of this rule with different slice strings.
+(rewrite (Add (Dot a b) d)
+         (Concat "1"
+           (Add (Dot (Slice "0:32"  a) b) (Slice "0:32"  d))
+           (Add (Dot (Slice "32:64" a) b) (Slice "32:64" d)))
+         :ruleset act_ir2ir)
+
+;; Rule 1 — slice/convert commute.
+(rewrite (Slice srng (Convert dt x))
+         (Convert dt (Slice srng x))
+         :ruleset act_ir2ir)
+
+;; Rule 6 — convert_i32 ∘ convert_i8 elimination.
+(rewrite (Convert "i32" (Convert "i8" x)) x :ruleset act_ir2ir)
+
+;; Rule 9 — reshape pair elimination (only when both attrs match).
+(rewrite (Reshape s (Reshape s x)) x :ruleset act_ir2ir)
+
+
+;; ============================================================
+;; flow_prune tile rules: T ∈ {128, 64, 32}
+;; ============================================================
+(rewrite (Dot a b) (TiledDot a b 128) :ruleset tiling)
+(rewrite (Dot a b) (TiledDot a b  64) :ruleset tiling)
+(rewrite (Dot a b) (TiledDot a b  32) :ruleset tiling)
+
+
+;; ============================================================
+;; Test workload — simple matmul-bias.
+;;   Z = A @ B + D
+;;   shape(A) = shape(D) = [64,16] i32  ;  shape(B) = [16,16] i32
+;; ============================================================
+(let $A (Var "A"))
+(let $B (Var "B"))
+(let $D (Var "D"))
+(let $Z (Add (Dot $A $B) $D))
+
+
+;; ============================================================
+;; Schedule:
+;;   1. one bounded pass of ACT IR2IR  → rule 0 fires on (Add (Dot …) …)
+;;      without recursing on its own RHS;
+;;   2. saturate tiling so every (Dot …) e-class collects its 3 alts.
+;; ============================================================
+(run-schedule
+  (repeat 1 (run act_ir2ir))
+  (saturate (run tiling)))
