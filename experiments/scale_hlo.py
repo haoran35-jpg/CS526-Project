@@ -1,15 +1,6 @@
 #!/usr/bin/env python3
-"""Stack N HLO transformer layers and measure how the e-graph + treewidth scale.
-
-For each N in `--layers`, this script:
-  1. Generates an egglog program with N stacked transformer-like layers
-     (HLO-style softmax / attention / FFN with residual).
-  2. Runs egglog with `--to-json` (no truncation).
-  3. Builds the primal graph of the e-graph hypergraph.
-  4. Computes upper bounds on treewidth (min-degree; optionally
-     min-fill-in for graphs below a configurable size).
-  5. Appends one row per N to `experiments/scale_results.csv`.
-"""
+"""Generate N-layer stacked HLO-style egglog, run egglog --to-json, primal graph,
+treewidth upper bounds; append rows to `experiments/scale_results.csv`."""
 
 from __future__ import annotations
 

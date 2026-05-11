@@ -1,13 +1,6 @@
-"""Small jax/flax models we lower to HLO and feed into egglog.
+"""Tiny Flax modules for HLO lowering; each `make_*` returns `(fn, sample_args)`.
 
-Each `make_*` function returns `(fn, sample_args)`. To get HLO text:
-
-    text = jax.jit(fn).lower(*sample_args).as_text("hlo")
-
-Models are intentionally small (B=1 or 2, hidden ~16/32) so HLO stays
-readable while still containing the canonical patterns we care about
-(softmax, dot, transpose, reshape, broadcast, reduce, residual, FFN).
-"""
+HLO: `jax.jit(fn).lower(*sample_args).as_text("hlo")`. Shapes are small for readable HLO."""
 
 from __future__ import annotations
 
@@ -15,8 +8,6 @@ import jax
 import jax.numpy as jnp
 import flax.linen as nn
 
-
-# ---------- minimal flax modules -------------------------------------------------
 
 class MLPBlock(nn.Module):
     hidden: int = 32
@@ -86,8 +77,6 @@ class StackedTransformer(nn.Module):
         return x
 
 
-# ---------- registry -------------------------------------------------------------
-
 def _key():
     return jax.random.key(0)
 
@@ -127,10 +116,8 @@ def make_stacked_transformer(n_layers: int = 4):
     return jax.jit(lambda p, x: model.apply(p, x)), (params, x)
 
 
-## ---- BERT / ViT-style models -----------------------------------------------
-
 class TransformerEncoderBlockFull(nn.Module):
-    """Standard pre-LayerNorm transformer block with multi-head attention."""
+    """Pre-LN transformer block (MHA + FFN)."""
 
     d_model: int
     n_heads: int
@@ -152,13 +139,7 @@ class TransformerEncoderBlockFull(nn.Module):
 
 
 class MiniBert(nn.Module):
-    """Minimal BERT-style encoder.
-
-    Includes token + positional embeddings, embedding LayerNorm, then
-    `n_layers` of standard transformer blocks. Output is the final hidden
-    state. Vocab/seq sizes are small to keep HLO readable but the op
-    structure is the same as real BERT.
-    """
+    """BERT-like encoder: embed + pos, LayerNorm, stacked transformer blocks."""
 
     n_layers: int = 12
     d_model: int = 768
@@ -185,11 +166,7 @@ class MiniBert(nn.Module):
 
 
 class MiniViT(nn.Module):
-    """Minimal ViT-style encoder.
-
-    A patch-embedding conv, learned class token + position embedding, then
-    `n_layers` transformer blocks. Output is the class-token hidden state.
-    """
+    """ViT-like: patch conv, cls token + pos embed, transformer stack, return cls."""
 
     image_size: int = 32
     patch_size: int = 4
@@ -268,21 +245,18 @@ REGISTRY = {
     "transformer8":      lambda: make_stacked_transformer(8),
     "transformer16":     lambda: make_stacked_transformer(16),
     "transformer32":     lambda: make_stacked_transformer(32),
-    # smaller BERT/ViT for sanity-checking the bridge
     "bert_tiny":         lambda: make_bert(n_layers=2, d_model=128,
                                           n_heads=2, ff_hidden=512,
                                           vocab_size=512, seq_len=16),
     "bert_small":        lambda: make_bert(n_layers=6, d_model=384,
                                           n_heads=6, ff_hidden=1536,
                                           vocab_size=1024, seq_len=32),
-    # canonical sizes
     "bert_base":         lambda: make_bert(n_layers=12, d_model=768,
                                           n_heads=12, ff_hidden=3072,
                                           vocab_size=1024, seq_len=32),
     "bert_large":        lambda: make_bert(n_layers=24, d_model=1024,
                                           n_heads=16, ff_hidden=4096,
                                           vocab_size=1024, seq_len=32),
-    # GPT-3 sized depth (95 layers); pushes the e-graph past 10^4 nodes
     "bert_xxl":          lambda: make_bert(n_layers=96, d_model=1024,
                                           n_heads=16, ff_hidden=4096,
                                           vocab_size=1024, seq_len=32),

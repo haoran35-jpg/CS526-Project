@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Sweep flow_prune over all ACT PII fixtures at several S_max budgets.
-
-Produces:
-    experiments/act_pii_sweep.csv
-    stdout summary table
-"""
+"""Run flow_prune on ACT PII fixtures across S_max; write `experiments/act_pii_sweep.csv`."""
 
 from __future__ import annotations
 
@@ -19,25 +14,24 @@ ROOT       = Path(__file__).resolve().parent.parent
 PII_DIR    = ROOT / "experiments" / "act_pii"
 SWEEP_OUT  = ROOT / "experiments" / "_flow_prune_act_sweep"
 CSV_OUT    = ROOT / "experiments" / "act_pii_sweep.csv"
-DEFAULT_SZ = 4              # PII bytes-per-elem already baked into onchip_bytes
+DEFAULT_SZ = 4
 
 
-# (fixture_stem, S_max bytes, sz)
 SCENARIOS: list[tuple[str, int, int]] = [
-    ("attention",         12_000, 2),    # bf16, infeasible (load overlap)
-    ("attention",         20_000, 2),    # feasible at T=64
-    ("attention",         65_536, 2),    # paper budget, easy fit
-    ("block_dot",          3_500, 4),    # i32, infeasible (add output)
-    ("block_dot",          5_000, 4),    # feasible
-    ("block_dot_bf16",     1_800, 2),    # infeasible (add)
-    ("block_dot_bf16",     3_000, 2),    # feasible
-    ("block_dot_pinned",   3_000, 4),    # converges via tile reduction
-    ("block_dot_pinned",   5_000, 4),    # feasible at T=64
-    ("dead_heavy",         3_000, 4),    # converges partially, then infeasible
-    ("dead_heavy",         5_000, 4),    # feasible
-    ("multi_rule",         3_000, 4),    # large multi-rule
+    ("attention",         12_000, 2),
+    ("attention",         20_000, 2),
+    ("attention",         65_536, 2),
+    ("block_dot",          3_500, 4),
+    ("block_dot",          5_000, 4),
+    ("block_dot_bf16",     1_800, 2),
+    ("block_dot_bf16",     3_000, 2),
+    ("block_dot_pinned",   3_000, 4),
+    ("block_dot_pinned",   5_000, 4),
+    ("dead_heavy",         3_000, 4),
+    ("dead_heavy",         5_000, 4),
+    ("multi_rule",         3_000, 4),
     ("multi_rule_full",    3_000, 4),
-    ("minimal_solver",     1_000, 4),    # all HBM
+    ("minimal_solver",     1_000, 4),
 ]
 
 

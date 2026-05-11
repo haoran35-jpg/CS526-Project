@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
-"""Stacked-bar chart of `TiledDot` survival vs round for the act_ir2ir egglog
-demo, with two side-by-side subplots — one per S_max scenario.
-
-Counts are over **non-subsumed `TiledDot` e-nodes still alive in the e-graph
-after each round**, grouped by tile size.  Mirrors the look-and-feel of
-`plot_tile_bars.py` (same color palette, same Overleaf-2-column footprint).
-"""
+"""Non-subsumed TiledDot counts by tile and round (two S_max scenarios); Plotly + matplotlib."""
 
 from __future__ import annotations
 
@@ -30,22 +24,16 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 
-# (subplot title, workdir relative to repo root)
 SCENARIOS: list[tuple[str, str]] = [
     ("S_max = 65,536 B  (1 prune step)",  "experiments/_flow_prune_act_ir2ir"),
     ("S_max = 20,000 B  (2 prune steps)", "experiments/_flow_prune_act_ir2ir_tight"),
 ]
 
 TILES  = (128, 64, 32)
-COLORS = {
-    128: "#D55E00",   # vermillion (most aggressive → pruned first)
-     64: "#E69F00",   # orange
-     32: "#009E73",   # bluish-green (final fallback)
-}
+COLORS = {128: "#D55E00", 64: "#E69F00", 32: "#009E73"}
 
 
 def per_round_counts(workdir: Path) -> list[dict]:
-    """Count surviving (non-subsumed) `TiledDot` e-nodes per round, by tile size."""
     rounds = sorted(glob.glob(str(workdir / "round*.json")))
     out = []
     for jp in rounds:

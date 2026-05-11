@@ -1,21 +1,7 @@
 #!/usr/bin/env python3
-"""Adapter: wrap a `jax_egglog/*.egg` (HLO datatype) with our tiling
-infrastructure so `flow_prune.py` can run on real DL workloads.
+"""Inject `TiledHDot` / `TiledHConv`, tiling + algebraic rulesets, and a two-phase
+`(run-schedule …)` into an HLO `.egg`. Default out: sibling `.tiled.egg`.
 
-Concretely it:
-  1. injects two new constructors into the existing `(datatype Hlo …)` block:
-         (TiledHDot  Hlo Hlo String i64)     ;; A, C, dim_tag, T
-         (TiledHConv Hlo Hlo String i64)     ;; A, K, conv_tag, T
-  2. inserts a tiling ruleset with T1–T5 single-op rewrites for HDot/HConv,
-  3. rewraps the existing `(rewrite ...)` blocks into ruleset `algebraic`,
-  4. replaces the trailing `(run N)` with our two-phase schedule:
-         (run-schedule
-           (repeat <k_alg> (run algebraic))
-           (run tiling))
-
-Output is written to a sibling path with `.tiled.egg` suffix by default.
-
-Usage:
     python3 experiments/adapt_jax_egg.py experiments/jax_egglog/bert_tiny.egg
         [--out OUT] [--tiles 32 64 128] [--k-algebraic 1]
 """
@@ -61,8 +47,8 @@ def _tag_rewrites_with_ruleset(src: str, ruleset: str) -> str:
     def flush_rewrite(text: str) -> str:
         if ":ruleset" in text:
             return text
-        stripped = text.rstrip()                       # body without trailing whitespace
-        trailing = text[len(stripped):]                # preserve the newline
+        stripped = text.rstrip()
+        trailing = text[len(stripped):]
         if not stripped.endswith(")"):
             return text
         return stripped[:-1] + f" :ruleset {ruleset})" + trailing
@@ -90,9 +76,7 @@ def _tag_rewrites_with_ruleset(src: str, ruleset: str) -> str:
 
 
 def _strip_trailing_run(src: str) -> tuple[str, int]:
-    """Drop the trailing `(run N)` (or `(run-schedule …)`) and return the
-    remaining body together with the original iteration count, defaulting to 3.
-    """
+    """Remove trailing `(run N)` or `(run-schedule …)`; return body and N (default 3)."""
     m = re.search(r"\(\s*run\s+(\d+)\s*\)\s*$", src)
     if m:
         return src[: m.start()].rstrip() + "\n", int(m.group(1))
@@ -109,8 +93,6 @@ def adapt(src: str, tiles=DEFAULT_TILES, k_algebraic: int | None = None) -> str:
     ]
     s = _inject_into_datatype(src, new_ctors)
 
-    # Declare rulesets immediately after the datatype block, BEFORE any
-    # `(rewrite … :ruleset …)` first appears.
     decls = (
         "\n;; ----- flow_prune ruleset declarations -----\n"
         "(ruleset algebraic)\n"

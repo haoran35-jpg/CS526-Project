@@ -1,30 +1,12 @@
-"""Convert XLA HLO text (as emitted by jax) into an egglog program.
+"""XLA HLO text (e.g. from jax) → egglog: datatype + lets, inline `call`, reduce bodies by reducer root op.
 
-The egglog datatype below covers the common HLO opcodes seen when lowering
-jax/flax models. Each HLO instruction becomes a `(let $name (HOp ...))`
-binding; sub-computations referenced via `call` are inlined; reduce
-sub-computations are mapped to `HReduceSum/Max/Min/Prod` based on the root
-op of the reducer.
-
-Attributes that don't affect graph topology (dim numbers, slice configs,
-dtypes, etc.) are folded into String tags, which is enough for the
-treewidth / extraction experiments we run downstream.
-
-Public API:
-    parse_hlo_module(text)   -> dict
-    emit_egglog(module, ...) -> str
-    convert(text, ...)       -> str  (parse + emit)
-"""
+Non-topological attrs become string tags. API: `parse_hlo_module`, `emit_egglog`, `convert`."""
 
 from __future__ import annotations
 
 import re
 from typing import Optional
 
-
-# ---------------------------------------------------------------------------
-# 1. Parser
-# ---------------------------------------------------------------------------
 
 _HDR_RE = re.compile(
     r"^\s*(?:(ENTRY)\s+)?([\w.]+)"
@@ -147,19 +129,8 @@ def parse_hlo_module(text: str) -> dict:
     return computations
 
 
-# ---------------------------------------------------------------------------
-# 2. Inlining of `call` instructions
-# ---------------------------------------------------------------------------
-
 def _inline_calls(entry: dict, module: dict) -> dict:
-    """Recursively inline every `call` instruction reachable from ENTRY.
-
-    Returns a flat computation containing only ENTRY's parameters and
-    non-call instructions; sub-computation parameters are substituted with
-    their corresponding caller-scope argument names, and every other
-    sub-computation instruction is emitted with a fresh prefixed name so
-    repeated inlinings do not collide.
-    """
+    """Inline `call` chains from ENTRY; rename locals with prefixes to avoid collisions."""
     flat_instrs: list[dict] = []
     counter = [0]
     entry_root_holder = {"root": entry["root"]}
@@ -188,7 +159,6 @@ def _inline_calls(entry: dict, module: dict) -> dict:
                         if is_entry_scope and entry_root_holder["root"] == name:
                             entry_root_holder["root"] = sub_scope[sub_root]
                     continue
-                # Sub not found: emit as opaque
             new_name = prefix + name
             copy = dict(instr)
             copy["name"] = new_name
@@ -208,10 +178,6 @@ def _inline_calls(entry: dict, module: dict) -> dict:
         "root": entry_root_holder["root"],
     }
 
-
-# ---------------------------------------------------------------------------
-# 3. Emitter
-# ---------------------------------------------------------------------------
 
 PRELUDE = r"""
 ;; Auto-generated HLO -> egglog datatype.
@@ -276,8 +242,7 @@ PRELUDE = r"""
 """
 
 
-# Minimal, always-safe rewrites (off by default; structural treewidth
-# measurements use the raw e-graph).
+# Optional rewrites (default off).
 SAFE_REWRITES = r"""
 ;; ---- structural simplifications ----------------------------------------
 (rewrite (HRelu (HRelu x)) (HRelu x))
@@ -337,13 +302,9 @@ def _emit_instruction(instr: dict, module: dict, neuter_ops: set | None = None) 
     attrs = instr["attrs"]
 
     if neuter_ops and op in neuter_ops and args:
-        # Replace this op with a transparent passthrough of its first
-        # operand. Removes the op's structural contribution to the e-graph
-        # without disconnecting downstream consumers.
         return f"(HCopy {args[0]})"
 
     if op == "constant":
-        # Constants are leaves; embed value or name in a tag.
         val_tag = (instr["args"][0] if instr["args"] else instr["name"]).replace('"', '')
         return f'(HConst "{val_tag}")'
 
@@ -446,7 +407,6 @@ def _emit_instruction(instr: dict, module: dict, neuter_ops: set | None = None) 
         init_arg = args[1] if len(args) > 1 else '(HConst "reduce_init_missing")'
         return f'({kind} {in_arg} {init_arg} "{dims}")'
 
-    # Generic fallback
     n = len(args)
     if n == 0:
         return f'(HConst "{op}_op")'
@@ -460,7 +420,6 @@ def _emit_instruction(instr: dict, module: dict, neuter_ops: set | None = None) 
         return f'(HOp4 "{op}" {args[0]} {args[1]} {args[2]} {args[3]})'
     if n == 5:
         return f'(HOp5 "{op}" {args[0]} {args[1]} {args[2]} {args[3]} {args[4]})'
-    # >5 args: nest left
     head = f'(HOp5 "{op}" {args[0]} {args[1]} {args[2]} {args[3]} {args[4]})'
     for nxt in args[5:]:
         head = f'(HOp2 "{op}_chain" {head} {nxt})'

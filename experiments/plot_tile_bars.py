@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""Stacked-bar chart of TiledHDot tile-size selection per round, sized for an
-Overleaf 2-column figure (\\figure*).  Renders both an interactive Plotly HTML
-and a publication-ready PNG via matplotlib (no headless-Chrome dependency)."""
+"""Stacked TiledHDot counts by tile and round: Plotly HTML + matplotlib PNG."""
 
 from __future__ import annotations
 
@@ -29,11 +27,7 @@ from plotly.subplots import make_subplots
 
 MODELS = ["mlp", "attention", "transformer8"]
 TILES  = (128, 64, 32)
-COLORS = {
-    128: "#D55E00",   # vermillion (most aggressive → gets pruned away)
-     64: "#E69F00",   # orange
-     32: "#009E73",   # bluish green (final fallback)
-}
+COLORS = {128: "#D55E00", 64: "#E69F00", 32: "#009E73"}
 
 
 def per_round_counts(model: str) -> list[dict]:
@@ -97,13 +91,12 @@ def make_plotly(data: dict[str, list[dict]]) -> go.Figure:
                     bgcolor="rgba(0,0,0,0)"),
         bargap=0.18,
     )
-    for ann in fig["layout"]["annotations"]:                    # subplot titles
+    for ann in fig["layout"]["annotations"]:
         ann["font"] = dict(size=15, family="serif")
     return fig
 
 
 def make_matplotlib(data: dict[str, list[dict]], out_png: Path):
-    """Same chart layout, but rendered via matplotlib for crisp PNG output."""
     plt.rcParams.update({
         "font.family": "serif",
         "font.size": 11,
